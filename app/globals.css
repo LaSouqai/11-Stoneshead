@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #0B0B0B;
+  --text: #DAD6CF;
+  --gold: #C6A664;
+}
+
+html, body { background: var(--bg); color: var(--text); }
+::selection { background: rgba(198,166,100,.25); }
+.hr-gold { @apply border-t border-gold/30 mx-auto w-4/5; }
+.btn-gold { @apply bg-gold text-black font-medium py-3 px-5 rounded-lg hover:bg-[#d5b970] transition; }
+.input {
+  @apply bg-[#1A1A1A] border border-gold/30 rounded-lg p-3 placeholder:text-stone/60 focus:outline-none focus:ring-1 focus:ring-gold/60;
+}
+.section { @apply px-6 py-24 mx-auto max-w-6xl; }
+
+
