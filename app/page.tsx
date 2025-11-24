@@ -89,18 +89,20 @@ export default function Home() {
         <motion.div
           animate={{
             y: videoPlaying ? "-38vh" : "0vh",
-            opacity: videoPlaying ? 0 : 1,
           }}
-          transition={{ 
-            y: { duration: 1.5, ease: "easeInOut" },
-            opacity: { duration: 1, delay: 1.2, ease: "easeOut" }
-          }}
+          transition={{ duration: 1.5, ease: "easeInOut" }}
           className="relative z-10 text-center px-6"
         >
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2 }}
+            animate={{ 
+              opacity: videoPlaying ? 0 : 1, 
+              y: 0 
+            }}
+            transition={{ 
+              opacity: { duration: 1, delay: videoPlaying ? 1.2 : 0 },
+              y: { duration: 1.2 }
+            }}
             className="font-playfair text-5xl md:text-7xl tracking-tight"
           >
             A Sanctuary Above the Strip
@@ -118,8 +120,14 @@ export default function Home() {
           {/* CTA */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.2 }}
+            animate={{ 
+              opacity: videoPlaying ? 0 : 1, 
+              y: 0 
+            }}
+            transition={{ 
+              opacity: { duration: 1, delay: videoPlaying ? 1.2 : 1.2 },
+              y: { delay: 1.2, duration: 0.5 }
+            }}
             className="mt-10 flex items-center justify-center"
           >
             <button 
