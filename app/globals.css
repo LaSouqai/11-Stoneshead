@@ -8,16 +8,58 @@
   --gold: #C6A664;
 }
 
-html, body { background: var(--bg); color: var(--text); }
+html, body { 
+  background: var(--bg); 
+  color: var(--text);
+  font-family: var(--font-raleway);
+  font-weight: 300;
+  letter-spacing: 0.1em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-raleway);
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+p {
+  letter-spacing: 0.08em;
+}
+
 ::selection { background: rgba(198,166,100,.25); }
 .hr-gold { @apply border-t border-gold/30 mx-auto w-4/5; }
-.btn-gold { @apply bg-gold text-black font-medium py-3 px-5 rounded-lg hover:bg-[#d5b970] transition; }
+.btn-gold { @apply bg-gold text-black font-raleway font-light tracking-wider uppercase py-3 px-5 rounded-lg hover:bg-[#d5b970] transition; }
 .input {
   @apply bg-[#1A1A1A] border border-gold/30 rounded-lg p-3 placeholder:text-stone/60 focus:outline-none focus:ring-1 focus:ring-gold/60;
 }
 .section { @apply px-6 py-24 mx-auto max-w-6xl; }
 
+/* Luxury Instagram Feed Styling */
+.elfsight-app-948404c0-baa0-4c39-ac93-1ce19dbb6db6 {
+  /* Header styling - matches gallery thumbnails */
+  .eapps-instagram-feed-header {
+    border-radius: 16px !important;
+    overflow: hidden !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.35) !important;
+    margin-bottom: 24px !important;
+    transition: all 0.3s ease !important;
+  }
 
+  .eapps-instagram-feed-header:hover {
+    transform: scale(1.02) !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.35), inset 0 0 40px rgba(0,0,0,0.3) !important;
+  }
+
+  /* Keep post thumbnails sharp (no rounding) */
+  .eapps-instagram-feed-posts-item {
+    border-radius: 0 !important;
+  }
+
+  .eapps-instagram-feed-posts-item-image {
+    border-radius: 0 !important;
+  }
+}
 
 
 

@@ -104,7 +104,7 @@ export default function Home() {
               opacity: { duration: 1.5, ease: "easeOut" },
               y: { duration: 1.2 }
             }}
-            className="font-cormorant text-6xl md:text-8xl tracking-wide font-light"
+            className="font-raleway text-5xl md:text-7xl tracking-[0.15em] font-light uppercase"
           >
             A Sanctuary Above the Strip
           </motion.h1>
@@ -148,7 +148,7 @@ export default function Home() {
 
       {/* ABOUT SECTION */}
       <section className="section max-w-4xl">
-        <h2 className="text-3xl text-gold font-cormorant mb-8">The Residence</h2>
+        <h2 className="text-3xl text-gold font-raleway mb-8">The Residence</h2>
         <div className="prose prose-invert prose-lg max-w-none leading-relaxed">
           <p>
             Perched high above the Las Vegas Valley, this residence redefines modern serenity.
@@ -165,7 +165,7 @@ export default function Home() {
       {/*   3D VIRTUAL TOUR                                         */}
       {/* --------------------------------------------------------- */}
       <section id="tour3d" className="section pb-32">
-        <h2 className="text-3xl mb-12 text-gold font-cormorant text-center">3D Virtual Tour</h2>
+        <h2 className="text-3xl mb-12 text-gold font-raleway text-center">3D Virtual Tour</h2>
         <p className="text-center text-stone/80 mb-8 max-w-2xl mx-auto">
           Explore every detail of this architectural masterpiece. Navigate through the home at your own pace.
         </p>
@@ -187,7 +187,7 @@ export default function Home() {
       {/*   GALLERY WITH TABS                                       */}
       {/* --------------------------------------------------------- */}
       <section id="gallery" className="section pb-32">
-        <h2 className="text-3xl mb-12 text-gold font-cormorant text-center">Gallery</h2>
+        <h2 className="text-3xl mb-12 text-gold font-raleway text-center">Gallery</h2>
 
         {/* Tabs */}
         <div className="flex justify-center gap-10 mb-12 text-lg">
@@ -292,7 +292,7 @@ export default function Home() {
       {/*   INSTAGRAM SECTION                                        */}
       {/* --------------------------------------------------------- */}
       <section id="instagram" className="section text-center pb-28">
-        <h2 className="text-3xl mb-8 text-gold font-cormorant">Follow the Build</h2>
+        <h2 className="text-3xl mb-8 text-gold font-raleway">Follow the Build</h2>
         <p className="text-stone/80 mb-6">Recent posts from Zarios Construction</p>
 
         <div className="max-w-3xl mx-auto">
@@ -304,7 +304,7 @@ export default function Home() {
 
       {/* CONTACT */}
       <section id="contact" className="section text-center pt-28 pb-36">
-        <h2 className="text-3xl mb-10 text-gold font-cormorant">Schedule a Private Tour</h2>
+        <h2 className="text-3xl mb-10 text-gold font-raleway">Schedule a Private Tour</h2>
 
         <form className="max-w-md mx-auto flex flex-col gap-5">
           <input type="text" placeholder="Your Name" className="input" />
