@@ -222,7 +222,7 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4 }}
-            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8"
+            className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8"
           >
             {exteriorImages.map((src) => (
               <motion.img
@@ -231,7 +231,7 @@ export default function Home() {
                 onClick={() => setSelectedImage(src)}
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.3 }}
-                className="rounded-2xl cursor-pointer object-cover w-full h-64 md:h-80 shadow-soft hover:shadow-[inset_0_0_40px_rgba(0,0,0,0.3)]"
+                className="rounded-2xl cursor-pointer object-cover w-full h-40 md:h-64 lg:h-80 shadow-soft hover:shadow-[inset_0_0_40px_rgba(0,0,0,0.3)]"
                 alt="Exterior property image"
               />
             ))}
@@ -246,7 +246,7 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4 }}
-            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8"
+            className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8"
           >
             {interiorImages.map((src) => (
               <motion.img
@@ -255,7 +255,7 @@ export default function Home() {
                 onClick={() => setSelectedImage(src)}
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.3 }}
-                className="rounded-2xl cursor-pointer object-cover w-full h-64 md:h-80 shadow-soft hover:shadow-[inset_0_0_40px_rgba(0,0,0,0.3)]"
+                className="rounded-2xl cursor-pointer object-cover w-full h-40 md:h-64 lg:h-80 shadow-soft hover:shadow-[inset_0_0_40px_rgba(0,0,0,0.3)]"
                 alt="Interior property image"
               />
             ))}
