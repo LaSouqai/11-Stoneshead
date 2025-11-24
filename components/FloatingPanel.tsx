@@ -15,11 +15,11 @@ export default function FloatingPanel() {
     }
   }
 
-  /* Auto-hide on scroll */
+  // Auto-hide on scroll (show when scrolling up)
   useEffect(() => {
     const handler = () => {
       const current = window.scrollY
-      setVisible(current < lastScroll)   // show when scrolling UP
+      setVisible(current < lastScroll)
       setLastScroll(current)
     }
 
@@ -39,13 +39,13 @@ export default function FloatingPanel() {
         ${visible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-6"}
       `}
     >
-        {[
-          { icon: <Camera size={22} strokeWidth={1.2} />, label: "Gallery", id: "gallery" },
-          { icon: <Instagram size={22} strokeWidth={1.2} />, label: "Instagram", id: "instagram" },
-          { icon: <Box size={22} strokeWidth={1.2} />, label: "3D Tour", id: "tour3d" },
-          { icon: <Mail size={22} strokeWidth={1.2} />, label: "Contact", id: "contact" },
-          { icon: <Phone size={22} strokeWidth={1.2} />, label: "Call", id: "call" },
-        ].map((item) => (
+      {[
+        { icon: <Camera size={22} strokeWidth={1.2} />, label: "Gallery", id: "gallery" },
+        { icon: <Instagram size={22} strokeWidth={1.2} />, label: "Instagram", id: "instagram" },
+        { icon: <Box size={22} strokeWidth={1.2} />, label: "3D Tour", id: "tour3d" },
+        { icon: <Mail size={22} strokeWidth={1.2} />, label: "Contact", id: "contact" },
+        { icon: <Phone size={22} strokeWidth={1.2} />, label: "Call", id: "call" },
+      ].map((item) => (
         <button
           key={item.id}
           onClick={() =>
@@ -55,8 +55,7 @@ export default function FloatingPanel() {
           }
           className="
             group relative p-3
-            text-transparent bg-clip-text bg-gradient-to-br from-gold/70 to-gold
-            hover:from-gold hover:to-[#e8d6a2]
+            text-gold/80 hover:text-gold
             transition-all duration-500
             hover:scale-110 hover:drop-shadow-[0_0_12px_rgba(198,166,100,0.35)]
           "
@@ -119,8 +118,7 @@ export default function FloatingPanel() {
           }
           className="
             p-2
-            text-transparent bg-clip-text bg-gradient-to-br from-gold/70 to-gold
-            hover:from-gold hover:to-[#e8d6a2]
+            text-gold/80 hover:text-gold
             transition-all duration-500 hover:scale-110
           "
         >
