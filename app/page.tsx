@@ -85,14 +85,15 @@ export default function Home() {
         {/* Deep gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent" />
 
-        {/* Hero text */}
+        {/* Hero text container - moves up smoothly */}
         <motion.div
           animate={{
             y: videoPlaying ? "-38vh" : "0vh",
           }}
-          transition={{ duration: 1.5, ease: "easeInOut" }}
+          transition={{ duration: 2, ease: [0.22, 1, 0.36, 1] }}
           className="relative z-10 text-center px-6"
         >
+          {/* Title - fades away */}
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ 
@@ -100,7 +101,7 @@ export default function Home() {
               y: 0 
             }}
             transition={{ 
-              opacity: { duration: 1, delay: videoPlaying ? 1.2 : 0 },
+              opacity: { duration: 1.5, ease: "easeOut" },
               y: { duration: 1.2 }
             }}
             className="font-cormorant text-6xl md:text-8xl tracking-wide font-light"
@@ -108,6 +109,7 @@ export default function Home() {
             A Sanctuary Above the Strip
           </motion.h1>
 
+          {/* Address - stays visible and moves to top */}
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -117,7 +119,7 @@ export default function Home() {
             11 Stoneshead Ct · Henderson, Nevada
           </motion.p>
 
-          {/* CTA */}
+          {/* CTA button - stays visible and moves to top */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
