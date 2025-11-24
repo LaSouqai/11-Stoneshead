@@ -149,6 +149,28 @@ export default function Home() {
       <div className="hr-gold" />
 
       {/* --------------------------------------------------------- */}
+      {/*   3D VIRTUAL TOUR                                         */}
+      {/* --------------------------------------------------------- */}
+      <section id="tour3d" className="section pb-32">
+        <h2 className="text-3xl mb-12 text-gold font-playfair text-center">3D Virtual Tour</h2>
+        <p className="text-center text-stone/80 mb-8 max-w-2xl mx-auto">
+          Explore every detail of this architectural masterpiece. Navigate through the home at your own pace.
+        </p>
+        
+        <div className="relative w-full max-w-6xl mx-auto" style={{ paddingBottom: "56.25%" }}>
+          <iframe
+            src="https://my.matterport.com/show/?m=m5MUrQ81k6V"
+            className="absolute inset-0 w-full h-full rounded-2xl shadow-soft"
+            frameBorder="0"
+            allowFullScreen
+            allow="xr-spatial-tracking"
+          />
+        </div>
+      </section>
+
+      <div className="hr-gold" />
+
+      {/* --------------------------------------------------------- */}
       {/*   GALLERY WITH TABS                                       */}
       {/* --------------------------------------------------------- */}
       <section id="gallery" className="section pb-32">
