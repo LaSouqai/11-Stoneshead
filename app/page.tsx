@@ -103,7 +103,7 @@ export default function Home() {
               opacity: { duration: 1, delay: videoPlaying ? 1.2 : 0 },
               y: { duration: 1.2 }
             }}
-            className="font-playfair text-5xl md:text-7xl tracking-tight"
+            className="font-cormorant text-6xl md:text-8xl tracking-wide font-light"
           >
             A Sanctuary Above the Strip
           </motion.h1>
@@ -112,7 +112,7 @@ export default function Home() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6, duration: 1 }}
-            className="mt-4 text-lg md:text-2xl text-gold"
+            className="mt-6 text-base md:text-xl text-gold font-raleway font-light tracking-[0.15em] uppercase"
           >
             11 Stoneshead Ct · Henderson, Nevada
           </motion.p>
@@ -120,21 +120,20 @@ export default function Home() {
           {/* CTA */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}
-            animate={{ 
-              opacity: videoPlaying ? 0 : 1, 
-              y: 0 
-            }}
-            transition={{ 
-              opacity: { duration: 1, delay: videoPlaying ? 1.2 : 1.2 },
-              y: { delay: 1.2, duration: 0.5 }
-            }}
-            className="mt-10 flex items-center justify-center"
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.2, duration: 0.5 }}
+            className="mt-12 flex items-center justify-center"
           >
             <button 
               onClick={toContact} 
-              className="btn-gold py-3 px-8 tracking-wide hover:shadow-[0_0_20px_rgba(198,166,100,0.45)] transition-all duration-300"
+              className="group relative px-8 py-4 bg-black/40 backdrop-blur-xl border border-gold/30 
+                         rounded-full text-gold font-raleway text-sm tracking-[0.2em] uppercase
+                         hover:border-gold/60 hover:bg-black/50 hover:shadow-[0_0_30px_rgba(198,166,100,0.25)]
+                         transition-all duration-500"
             >
-              Schedule a Tour
+              <span className="relative z-10">Schedule a Tour</span>
+              <span className="absolute inset-0 rounded-full bg-gradient-to-r from-gold/0 via-gold/5 to-gold/0 
+                             opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             </button>
           </motion.div>
         </motion.div>
@@ -147,7 +146,7 @@ export default function Home() {
 
       {/* ABOUT SECTION */}
       <section className="section max-w-4xl">
-        <h2 className="text-3xl text-gold font-playfair mb-8">The Residence</h2>
+        <h2 className="text-3xl text-gold font-cormorant mb-8">The Residence</h2>
         <div className="prose prose-invert prose-lg max-w-none leading-relaxed">
           <p>
             Perched high above the Las Vegas Valley, this residence redefines modern serenity.
@@ -164,7 +163,7 @@ export default function Home() {
       {/*   3D VIRTUAL TOUR                                         */}
       {/* --------------------------------------------------------- */}
       <section id="tour3d" className="section pb-32">
-        <h2 className="text-3xl mb-12 text-gold font-playfair text-center">3D Virtual Tour</h2>
+        <h2 className="text-3xl mb-12 text-gold font-cormorant text-center">3D Virtual Tour</h2>
         <p className="text-center text-stone/80 mb-8 max-w-2xl mx-auto">
           Explore every detail of this architectural masterpiece. Navigate through the home at your own pace.
         </p>
@@ -186,7 +185,7 @@ export default function Home() {
       {/*   GALLERY WITH TABS                                       */}
       {/* --------------------------------------------------------- */}
       <section id="gallery" className="section pb-32">
-        <h2 className="text-3xl mb-12 text-gold font-playfair text-center">Gallery</h2>
+        <h2 className="text-3xl mb-12 text-gold font-cormorant text-center">Gallery</h2>
 
         {/* Tabs */}
         <div className="flex justify-center gap-10 mb-12 text-lg">
@@ -291,7 +290,7 @@ export default function Home() {
       {/*   INSTAGRAM SECTION                                        */}
       {/* --------------------------------------------------------- */}
       <section id="instagram" className="section text-center pb-28">
-        <h2 className="text-3xl mb-8 text-gold font-playfair">Follow the Build</h2>
+        <h2 className="text-3xl mb-8 text-gold font-cormorant">Follow the Build</h2>
         <p className="text-stone/80 mb-6">Recent posts from Zarios Construction</p>
 
         <div className="max-w-3xl mx-auto">
@@ -303,7 +302,7 @@ export default function Home() {
 
       {/* CONTACT */}
       <section id="contact" className="section text-center pt-28 pb-36">
-        <h2 className="text-3xl mb-10 text-gold font-playfair">Schedule a Private Tour</h2>
+        <h2 className="text-3xl mb-10 text-gold font-cormorant">Schedule a Private Tour</h2>
 
         <form className="max-w-md mx-auto flex flex-col gap-5">
           <input type="text" placeholder="Your Name" className="input" />

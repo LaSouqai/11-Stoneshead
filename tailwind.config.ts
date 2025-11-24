@@ -19,8 +19,8 @@ const config: Config = {
         'lux': 'cubic-bezier(0.22, 1, 0.36, 1)'
       },
       fontFamily: {
-        inter: ["var(--font-inter)"],
-        playfair: ["var(--font-playfair)"],
+        raleway: ["var(--font-raleway)"],
+        cormorant: ["var(--font-cormorant)"],
       },
     },
   },

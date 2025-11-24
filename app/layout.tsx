@@ -1,8 +1,16 @@
 import "./globals.css"
-import { Inter, Playfair_Display } from "next/font/google"
+import { Cormorant_Garamond, Raleway } from "next/font/google"
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
-const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair" })
+const cormorant = Cormorant_Garamond({ 
+  subsets: ["latin"], 
+  weight: ["300", "400", "500", "600"],
+  variable: "--font-cormorant" 
+})
+const raleway = Raleway({ 
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
+  variable: "--font-raleway" 
+})
 
 export const metadata = {
   title: "Ascaya Residence · A Sanctuary Above the Strip",
@@ -11,8 +19,8 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
-      <body>{children}</body>
+    <html lang="en" className={`${raleway.variable} ${cormorant.variable}`}>
+      <body className="font-raleway">{children}</body>
     </html>
   )
 }
