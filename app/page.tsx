@@ -275,23 +275,9 @@ export default function Home() {
 
       <div className="hr-gold" />
 
-      {/* 3D VIRTUAL TOUR */}
-      <section id="tour3d" className="section text-center pb-32">
-        <h2 className="text-3xl mb-8 text-gold font-playfair">3D Virtual Tour</h2>
-
-        <div className="max-w-5xl mx-auto rounded-3xl overflow-hidden shadow-soft">
-          <iframe 
-            src="YOUR_MATTERPORT_URL_HERE"
-            className="w-full h-[600px] rounded-3xl"
-            allow="xr-spatial-tracking; fullscreen"
-            allowFullScreen
-          ></iframe>
-        </div>
-      </section>
-
-      <div className="hr-gold" />
-
-      {/* INSTAGRAM SECTION */}
+      {/* --------------------------------------------------------- */}
+      {/*   INSTAGRAM SECTION                                        */}
+      {/* --------------------------------------------------------- */}
       <section id="instagram" className="section text-center pb-28">
         <h2 className="text-3xl mb-8 text-gold font-playfair">Follow the Build</h2>
         <p className="text-stone/80 mb-6">Recent posts from Zarios Construction</p>
