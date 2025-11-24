@@ -89,8 +89,12 @@ export default function Home() {
         <motion.div
           animate={{
             y: videoPlaying ? "-38vh" : "0vh",
+            opacity: videoPlaying ? 0 : 1,
           }}
-          transition={{ duration: 1.5, ease: "easeInOut" }}
+          transition={{ 
+            y: { duration: 1.5, ease: "easeInOut" },
+            opacity: { duration: 1, delay: 1.2, ease: "easeOut" }
+          }}
           className="relative z-10 text-center px-6"
         >
           <motion.h1
