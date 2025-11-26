@@ -212,7 +212,7 @@ export default function FloatingPanel() {
   const MobilePanel = (
     <div
       className={`
-        md:hidden fixed bottom-4 left-1/2 -translate-x-1/2
+        md:hidden fixed bottom-8 left-1/2 -translate-x-1/2
         flex items-center gap-2 z-50
         transition-all duration-700
         ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}

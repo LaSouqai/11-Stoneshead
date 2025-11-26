@@ -94,7 +94,10 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen bg-charcoal text-stone">
+    <main className="min-h-screen bg-charcoal text-stone relative">
+      {/* Thin gold frame around the page */}
+      <div className="fixed inset-0 border border-[#B8935A]/30 pointer-events-none z-[100]" />
+      
       {/* ✅ FLOATING PANEL (includes Explore button) */}
       <FloatingPanel />
 
@@ -152,8 +155,8 @@ export default function Home() {
           initial={{ opacity: 1, y: 0 }} // Starts visible at center
           animate={heroVisible ? { 
             opacity: 1, 
-            y: isMobile ? -200 : -420 
-          } : { opacity: 1, y: 0 }} // Rises 420px desktop, 200px mobile
+            y: isMobile ? -320 : -420 
+          } : { opacity: 1, y: 0 }} // Rises 420px desktop, 320px mobile
           transition={{ duration: 4, ease: [0.22, 1, 0.36, 1], delay: 1.5 }} // Pause 1.5s, then rise for 4s
           className="relative z-10 text-center px-6 flex flex-col items-center justify-center w-full" // Added w-full for centering
         >
