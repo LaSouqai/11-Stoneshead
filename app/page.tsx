@@ -38,10 +38,19 @@ export default function Home() {
   const [heroVisible, setHeroVisible] = useState(false)
   const [showSanctuary, setShowSanctuary] = useState(true)
   const [showVideo, setShowVideo] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
     const t = setTimeout(() => setLoaded(true), 350)
     return () => clearTimeout(t)
+  }, [])
+
+  // Detect mobile screen size
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768)
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
   }, [])
 
   // Show video after 1.5 second black screen
@@ -128,7 +137,10 @@ export default function Home() {
         {/* Hero intro animation wrapper - visible immediately, pauses, then rises */}
         <motion.div
           initial={{ opacity: 1, y: 0 }}
-          animate={heroVisible ? { opacity: 1, y: -420 } : { opacity: 1, y: 0 }}
+          animate={heroVisible ? { 
+            opacity: 1, 
+            y: isMobile ? -200 : -420 
+          } : { opacity: 1, y: 0 }}
           transition={{ duration: 4, ease: "easeOut", delay: 1.5 }}
           className="relative z-10 flex flex-col items-center gap-6 px-6 pt-16 text-center w-full"
         >
