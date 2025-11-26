@@ -228,23 +228,41 @@ export default function Home() {
               Spanning 9,747 square feet across two meticulously designed levels, 11 Stoneshead represents the convergence of commercial-grade engineering, luxury construction quality, and architectural vision. Every material, system, and detail has been selected to create an enduring modern masterpiece.
             </p>
           </div>
-          <Link
-            href="/residence"
-            className="inline-flex items-center justify-center min-w-[220px] h-[48px]
-                       rounded-full
-                       px-6 text-sm tracking-wide font-raleway uppercase
-                       bg-black/40 backdrop-blur-xl
-                       border border-[#B8935A]/40
-                       text-[#B8935A]
-                       shadow-[0_0_20px_rgba(0,0,0,0.4)]
-                       hover:bg-black/50
-                       hover:border-[#B8935A]/60
-                       hover:shadow-[0_0_30px_rgba(0,0,0,0.4)]
-                       hover:scale-[1.04]
-                       transition-all duration-300 ease-out"
+          <motion.div
+            initial={{ scale: 1 }}
+            whileInView={{ 
+              scale: [1, 1.15, 1],
+              filter: [
+                "drop-shadow(0 0 0px rgba(184,147,90,0))",
+                "drop-shadow(0 0 30px rgba(184,147,90,1))",
+                "drop-shadow(0 0 0px rgba(184,147,90,0))"
+              ]
+            }}
+            viewport={{ once: true }}
+            transition={{ 
+              duration: 3,
+              ease: "easeInOut",
+              times: [0, 0.5, 1]
+            }}
           >
-            Explore Full Details
-          </Link>
+            <Link
+              href="/residence"
+              className="inline-flex items-center justify-center min-w-[220px] h-[48px]
+                         rounded-full
+                         px-6 text-sm tracking-wide font-raleway uppercase
+                         bg-black/40 backdrop-blur-xl
+                         border border-[#B8935A]/40
+                         text-[#B8935A]
+                         shadow-[0_0_20px_rgba(0,0,0,0.4)]
+                         hover:bg-black/50
+                         hover:border-[#B8935A]/60
+                         hover:shadow-[0_0_30px_rgba(0,0,0,0.4)]
+                         hover:scale-[1.04]
+                         transition-all duration-300 ease-out"
+            >
+              Explore Full Details
+            </Link>
+          </motion.div>
         </motion.div>
       </section>
 
