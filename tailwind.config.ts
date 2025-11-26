@@ -9,7 +9,7 @@ const config: Config = {
     extend: {
       colors: {
         charcoal: "#0B0B0B",
-        gold: "#C6A664",
+        gold: "#B8935A",
         stone: "#DAD6CF",
       },
       boxShadow: {

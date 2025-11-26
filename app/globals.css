@@ -5,7 +5,7 @@
 :root {
   --bg: #0B0B0B;
   --text: #DAD6CF;
-  --gold: #C6A664;
+  --gold: #B8935A;
 }
 
 html, body { 
@@ -25,6 +25,11 @@ h1, h2, h3, h4, h5, h6 {
 
 p {
   letter-spacing: 0.08em;
+}
+
+/* Luxury text shadow for hero titles */
+.text-shadow-sm {
+  text-shadow: 0 1px 4px rgba(0,0,0,0.18);
 }
 
 ::selection { background: rgba(198,166,100,.25); }

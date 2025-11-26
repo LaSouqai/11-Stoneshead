@@ -5,7 +5,8 @@ import { motion, AnimatePresence } from "framer-motion"
 import ScrollCue from "@/components/ScrollCue"
 import InstagramCarousel from "@/components/InstagramCarousel"
 import Footer from "@/components/Footer"
-import FloatingPanel from "@/components/FloatingPanel"   // ✅ FIXED: PANEL IMPORT
+import FloatingPanel from "@/components/FloatingPanel"
+import ExploreFloatingCTA from "@/components/ExploreFloatingCTA"
 
 /* --------------------------------------------------------- */
 /*   GALLERY IMAGE ARRAYS (Exterior + Interior)              */
@@ -33,10 +34,35 @@ export default function Home() {
   const [loaded, setLoaded] = useState(false)
   const [activeTab, setActiveTab] = useState<"exterior" | "interior">("exterior")
   const [videoPlaying, setVideoPlaying] = useState(false)
+  const [scrollY, setScrollY] = useState(0)
+  const [heroVisible, setHeroVisible] = useState(false)
+  const [showSanctuary, setShowSanctuary] = useState(true)
+  const [showVideo, setShowVideo] = useState(false)
 
   useEffect(() => {
     const t = setTimeout(() => setLoaded(true), 350)
     return () => clearTimeout(t)
+  }, [])
+
+  // Show video after 1.5 second black screen
+  useEffect(() => {
+    const timer = setTimeout(() => setShowVideo(true), 1500)
+    return () => clearTimeout(timer)
+  }, [])
+
+  // Parallax effect
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY)
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
+  // Hero intro animation sequence
+  useEffect(() => {
+    setHeroVisible(true)
+    // Fade out sanctuary during rise: 1.5s pause + 2.5s into rise = 4s
+    const timer = setTimeout(() => setShowSanctuary(false), 4000)
+    return () => clearTimeout(timer)
   }, [])
 
   const handleVideoPlay = () => {
@@ -52,6 +78,9 @@ export default function Home() {
 
       {/* ✅ RESTORED FLOATING PANEL */}
       <FloatingPanel />
+
+      {/* ✅ LEFT FLOATING CTA */}
+      <ExploreFloatingCTA />
 
       {/* --------------------------------------------------------- */}
       {/*   Cinematic loading fade                                  */}
@@ -72,72 +101,64 @@ export default function Home() {
       {/*   HERO SECTION                                             */}
       {/* --------------------------------------------------------- */}
       <section className="relative h-[100svh] flex items-center justify-center overflow-hidden">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          onPlay={handleVideoPlay}
-          className="absolute inset-0 w-full h-full object-cover opacity-60"
-          src="/drone-footage.mp4"
+        {/* Black screen for initial 1 second */}
+        <div 
+          className={`absolute inset-0 bg-black transition-opacity duration-700 ${showVideo ? 'opacity-0' : 'opacity-100'}`}
+          style={{ pointerEvents: showVideo ? 'none' : 'auto' }}
         />
 
-        {/* Deep gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent" />
-
-        {/* Hero text container - moves up smoothly */}
-        <motion.div
-          animate={{
-            y: videoPlaying ? "-38vh" : "0vh",
-          }}
-          transition={{ duration: 2, ease: [0.22, 1, 0.36, 1] }}
-          className="relative z-10 text-center px-6"
+        <div
+          className="absolute inset-0 hero-bg"
+          style={{ transform: `translateY(${scrollY * 0.15}px)` }}
         >
-          {/* Title - fades away */}
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            onPlay={handleVideoPlay}
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${showVideo ? 'opacity-60' : 'opacity-0'}`}
+            src="/drone-footage.mp4"
+          />
+        </div>
+
+        {/* Lighter gradient overlay - reveals more Strip detail */}
+        <div className={`absolute inset-0 bg-gradient-to-t from-black/50 via-black/25 to-transparent transition-opacity duration-700 ${showVideo ? 'opacity-100' : 'opacity-0'}`} />
+
+        {/* Hero intro animation wrapper - visible immediately, pauses, then rises */}
+        <motion.div
+          initial={{ opacity: 1, y: 0 }}
+          animate={heroVisible ? { opacity: 1, y: -420 } : { opacity: 1, y: 0 }}
+          transition={{ duration: 4, ease: "easeOut", delay: 1.5 }}
+          className="relative z-10 flex flex-col items-center gap-6 px-6 pt-16 text-center w-full"
+        >
+          {/* Title - Sanctuary text that fades out after appearing */}
           <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ 
-              opacity: videoPlaying ? 0 : 1, 
-              y: 0 
-            }}
-            transition={{ 
-              opacity: { duration: 1.5, ease: "easeOut" },
-              y: { duration: 1.2 }
-            }}
-            className="font-raleway text-5xl md:text-7xl tracking-[0.15em] font-light uppercase"
+            initial={{ opacity: 1 }}
+            animate={showSanctuary ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="text-4xl md:text-6xl font-light tracking-tight text-white text-shadow-sm font-raleway uppercase text-center"
           >
             A Sanctuary Above the Strip
           </motion.h1>
 
-          {/* Address - stays visible and moves to top */}
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.6, duration: 1 }}
-            className="mt-6 text-base md:text-xl text-gold font-raleway font-light tracking-[0.15em] uppercase"
-          >
-            11 Stoneshead Ct · Henderson, Nevada
-          </motion.p>
+          {/* Address - all gold for luxury */}
+          <div className="text-[#B8935A] tracking-widest text-base md:text-lg flex flex-wrap gap-2 font-raleway uppercase text-shadow-sm justify-center">
+            <span>11 Stoneshead Ct</span>
+            <span>·</span>
+            <span>Henderson</span>
+            <span>·</span>
+            <span>Nevada</span>
+          </div>
 
-          {/* CTA button - stays visible and moves to top */}
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.2, duration: 0.5 }}
-            className="mt-12 flex items-center justify-center"
-          >
-            <button 
-              onClick={toContact} 
-              className="group relative px-8 py-4 bg-black/40 backdrop-blur-xl border border-gold/30 
-                         rounded-full text-gold font-raleway text-sm tracking-[0.2em] uppercase
-                         hover:border-gold/60 hover:bg-black/50 hover:shadow-[0_0_30px_rgba(198,166,100,0.25)]
-                         transition-all duration-500"
-            >
-              <span className="relative z-10">Schedule a Tour</span>
-              <span className="absolute inset-0 rounded-full bg-gradient-to-r from-gold/0 via-gold/5 to-gold/0 
-                             opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            </button>
-          </motion.div>
+          {/* ASCAYA with luxury separators */}
+          <div className="mt-8 flex items-center justify-center gap-4 w-full">
+            <div className="h-[1px] w-14 bg-gradient-to-r from-transparent to-[#B8935A]/50" />
+            <span className="text-[#B8935A] text-xl md:text-2xl tracking-[0.3em] font-raleway font-light uppercase">
+              Ascaya
+            </span>
+            <div className="h-[1px] w-14 bg-gradient-to-l from-transparent to-[#B8935A]/50" />
+          </div>
         </motion.div>
 
         {/* Scroll cue */}
@@ -147,16 +168,51 @@ export default function Home() {
       <div className="hr-gold" />
 
       {/* ABOUT SECTION */}
-      <section className="section max-w-4xl">
-        <h2 className="text-3xl text-gold font-raleway mb-8">The Residence</h2>
-        <div className="prose prose-invert prose-lg max-w-none leading-relaxed">
-          <p>
-            Perched high above the Las Vegas Valley, this residence redefines modern serenity.
-            Crafted by Zarios Construction, it harmonizes natural stone, warm lighting, and panoramic
-            glass that frames the iconic skyline. Designed for both quiet reflection and elevated
-            entertainment, every room carries a sense of calm, purpose, and architectural significance.
+      <section className="section max-w-4xl text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
+          <h2 className="text-4xl md:text-5xl text-[#B8935A] font-raleway font-light tracking-tight mb-6">
+            The Residence
+          </h2>
+          <p className="text-xl md:text-2xl text-[#B8935A] font-light tracking-wide mb-8">
+            A modern architectural estate designed to frame the Las Vegas Strip.
           </p>
-        </div>
+          <div className="prose prose-invert prose-lg max-w-none leading-relaxed mx-auto mb-12">
+            <p className="text-stone/80 font-light tracking-wide">
+              Spanning 9,747 square feet across two meticulously designed levels, 11 Stoneshead represents 
+              the convergence of commercial-grade engineering, luxury construction quality, and architectural vision. 
+              Every material, system, and detail has been selected to create an enduring modern masterpiece.
+            </p>
+          </div>
+
+          {/* CTA to Residence Page */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <a
+              href="/residence"
+              className="inline-block px-10 py-4 rounded-full text-sm tracking-wide font-raleway uppercase
+                         bg-black/40 backdrop-blur-xl
+                         border border-[#B8935A]/40
+                         text-[#B8935A]
+                         shadow-[0_0_20px_rgba(0,0,0,0.4)]
+                         hover:bg-black/50
+                         hover:border-[#B8935A]/60
+                         hover:shadow-[0_0_30px_rgba(199,167,106,0.4)]
+                         hover:scale-[1.04]
+                         transition-all duration-300 ease-out"
+            >
+              Explore Full Details
+            </a>
+          </motion.div>
+        </motion.div>
       </section>
 
       <div className="hr-gold" />
