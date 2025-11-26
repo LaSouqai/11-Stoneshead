@@ -76,7 +76,7 @@ export default function Home() {
     // Phase 3: Sanctuary text fades out during rise
     const sanctuaryFadeOutTimer = setTimeout(() => {
       setShowSanctuary(false)
-    }, 4000) // Fades out at 4.0s (1.5s pause + 2.5s into rise)
+    }, 5000) // Fades out at 5.0s (1.5s pause + 3.5s into rise)
 
     return () => {
       clearTimeout(initialFadeInTimer)
@@ -95,8 +95,8 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-charcoal text-stone relative">
-      {/* Thin gold frame around the page */}
-      <div className="fixed inset-0 border border-[#B8935A]/30 pointer-events-none z-[100]" />
+      {/* Thin gold frame around the page with rounded corners */}
+      <div className="fixed inset-2 md:inset-4 border border-[#B8935A]/30 rounded-2xl md:rounded-3xl pointer-events-none z-[100]" />
       
       {/* ✅ FLOATING PANEL (includes Explore button) */}
       <FloatingPanel />
@@ -157,14 +157,18 @@ export default function Home() {
             opacity: 1, 
             y: isMobile ? -320 : -420 
           } : { opacity: 1, y: 0 }} // Rises 420px desktop, 320px mobile
-          transition={{ duration: 4, ease: [0.22, 1, 0.36, 1], delay: 1.5 }} // Pause 1.5s, then rise for 4s
+          transition={{ 
+            duration: isMobile ? 4 : 6.5, 
+            ease: [0.16, 1, 0.3, 1], 
+            delay: 1.5 
+          }} // Desktop: slower 6.5s, more graceful easing
           className="relative z-10 text-center px-6 flex flex-col items-center justify-center w-full" // Added w-full for centering
         >
           {/* Title - fades away */}
           <motion.h1
             initial={{ opacity: 1 }} // Starts visible
             animate={showSanctuary ? { opacity: 1 } : { opacity: 0 }} // Fades out during rise
-            transition={{ duration: 0.6, ease: "easeOut" }}
+            transition={{ duration: 1, ease: "easeOut" }}
             className="font-raleway text-5xl md:text-7xl tracking-[0.15em] font-light uppercase text-white text-shadow-sm text-center"
           >
             A Sanctuary Above the Strip
