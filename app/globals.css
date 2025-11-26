@@ -32,6 +32,20 @@ p {
   text-shadow: 0 1px 4px rgba(0,0,0,0.18);
 }
 
+/* Slow spin animation for floating panel glow */
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
+
 ::selection { background: rgba(198,166,100,.25); }
 .hr-gold { @apply border-t border-gold/30 mx-auto w-4/5; }
 .btn-gold { @apply bg-gold text-black font-raleway font-light tracking-wider uppercase py-3 px-5 rounded-lg hover:bg-[#d5b970] transition; }
