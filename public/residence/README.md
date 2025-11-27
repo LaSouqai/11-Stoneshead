@@ -55,3 +55,4 @@ Place PDF files in the `downloads/` folder:
 - Maintain consistent lighting and color grading across all photos
 
 
+

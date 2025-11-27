@@ -181,8 +181,8 @@ export default function Home() {
           initial={{ opacity: 1, y: 0 }} // Starts visible at center
           animate={heroVisible ? { 
             opacity: 1, 
-            y: isMobile ? -320 : -420 
-          } : { opacity: 1, y: 0 }} // Rises 420px desktop, 320px mobile
+            y: isMobile ? -280 : -300 
+          } : { opacity: 1, y: 0 }} // Rises 300px desktop, 280px mobile - keeps address visible
           transition={{ 
             duration: isMobile ? 4 : 6.5, 
             ease: [0.16, 1, 0.3, 1], 
