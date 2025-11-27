@@ -12,9 +12,9 @@ const sections = [
   { id: "outdoor", label: "Outdoor" },
   { id: "wellness", label: "Wellness" },
   { id: "engineering", label: "Engineering" },
+  { id: "builder", label: "Builder" },
   { id: "floorplans", label: "Floor Plans" },
   { id: "gallery", label: "Gallery" },
-  { id: "builder", label: "Builder" },
   { id: "downloads", label: "Downloads" },
   { id: "contact", label: "Contact" },
 ]

@@ -114,9 +114,9 @@ export default function ResidencePage() {
         <OutdoorSection />
         <WellnessSection />
         <EngineeringSection />
+        <BuilderSection />
         <FloorPlansSection />
         <GalleryPreview />
-        <BuilderSection />
         <DownloadsSection />
         <ContactSection />
         <ResidenceFooter />
