@@ -26,14 +26,14 @@ export default function DownloadsSection() {
       description: "Comprehensive material selections and finishes",
       fileSize: "5.1 MB",
       fileType: "PDF",
-      href: "/downloads/materials.pdf"
+      href: "/pdf/material board.pdf"
     },
     {
       title: "Specifications Sheet",
       description: "Detailed technical specifications and systems",
       fileSize: "1.8 MB",
       fileType: "PDF",
-      href: "/downloads/specifications.pdf"
+      href: "/pdf/Spec Sheet.pdf"
     },
     {
       title: "Construction Set",
