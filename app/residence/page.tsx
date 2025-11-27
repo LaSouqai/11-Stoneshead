@@ -53,6 +53,7 @@ import WellnessSection from "@/components/residence/WellnessSection"
 import EngineeringSection from "@/components/residence/EngineeringSection"
 import FloorPlansSection from "@/components/residence/FloorPlansSection"
 import GalleryPreview from "@/components/residence/GalleryPreview"
+import BuilderSection from "@/components/residence/BuilderSection"
 import DownloadsSection from "@/components/residence/DownloadsSection"
 import ContactSection from "@/components/residence/ContactSection"
 import ResidenceFooter from "@/components/residence/ResidenceFooter"
@@ -115,6 +116,7 @@ export default function ResidencePage() {
         <EngineeringSection />
         <FloorPlansSection />
         <GalleryPreview />
+        <BuilderSection />
         <DownloadsSection />
         <ContactSection />
         <ResidenceFooter />

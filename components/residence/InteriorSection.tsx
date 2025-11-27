@@ -53,7 +53,7 @@ export default function InteriorSection() {
           className="rounded-2xl overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.20)]"
         >
           <img
-            src="/gallery/2.jpg"
+            src="/gallery/Interior_Living_space.png"
             alt="Interior living space"
             className="w-full h-[400px] md:h-[500px] object-cover"
           />
@@ -66,8 +66,8 @@ export default function InteriorSection() {
           className="rounded-2xl overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.20)]"
         >
           <img
-            src="/gallery/3.jpg"
-            alt="Interior detail"
+            src="/gallery/Interior_Floating_Staircase.png"
+            alt="Floating staircase detail"
             className="w-full h-[400px] md:h-[500px] object-cover"
           />
         </motion.div>

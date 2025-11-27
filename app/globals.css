@@ -70,6 +70,21 @@ p {
     box-shadow: 0 10px 30px rgba(0,0,0,0.35), inset 0 0 40px rgba(0,0,0,0.3) !important;
   }
 
+  /* Hide follower and post counts from header */
+  .eapps-instagram-feed-header-stats,
+  .eapps-instagram-feed-header-meta,
+  .es-header-stats,
+  .eapps-instagram-feed-header-info-stats,
+  .eapps-instagram-feed-header-info-item {
+    display: none !important;
+  }
+  
+  /* Also hide specific text containing "Posts" "Followers" "Following" */
+  .eapps-instagram-feed-header-info-item-value,
+  .eapps-instagram-feed-header-info-item-label {
+    display: none !important;
+  }
+
   /* Keep post thumbnails sharp (no rounding) */
   .eapps-instagram-feed-posts-item {
     border-radius: 0 !important;

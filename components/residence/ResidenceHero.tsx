@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import Image from "next/image"
+import Link from "next/link"
 import LuxuryTagline from "@/src/components/ui/LuxuryTagline"
 import LuxuryHeading from "@/src/components/ui/LuxuryHeading"
 import LuxuryParagraph from "@/src/components/ui/LuxuryParagraph"
@@ -9,16 +9,9 @@ import LuxuryParagraph from "@/src/components/ui/LuxuryParagraph"
 export default function ResidenceHero() {
   return (
     <section id="hero" className="relative h-screen min-h-[700px] flex items-center justify-center overflow-hidden pt-20">
-      {/* Background Image */}
+      {/* Background Gradient */}
       <div className="absolute inset-0">
-        <Image
-          src="/drone-footage.mp4" // fallback - user should replace
-          alt="11 Stoneshead Residence"
-          fill
-          className="object-cover opacity-40"
-          priority
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-white/80 via-white/50 to-white/80" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-white/70 to-white/90" />
       </div>
 
       {/* Content */}
@@ -28,13 +21,40 @@ export default function ResidenceHero() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          <LuxuryTagline animate={false} className="mb-10 text-sm md:text-base font-normal">
-            11 Stoneshead · Ascaya
-          </LuxuryTagline>
+          <div className="mb-10 text-[#6A6A6A] font-raleway font-light tracking-[0.2em] uppercase">
+            <span className="text-xs md:text-sm">11 Stoneshead</span>
+            <span className="mx-3 text-[#B8935A]">·</span>
+            <span className="text-xs md:text-sm">Ascaya</span>
+          </div>
           
-          <h1 className="text-7xl md:text-8xl lg:text-9xl font-normal tracking-tight text-[#1B1B1B] mb-12 leading-none">
+          <h1 className="text-7xl md:text-8xl lg:text-9xl font-normal tracking-tight text-[#1B1B1B] mb-8 leading-none">
             The Residence
           </h1>
+          
+          {/* By Zarios Construction - Clickable */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
+            className="flex items-center justify-center gap-3 mb-12"
+          >
+            <span className="text-sm text-[#8A8A8A] font-raleway font-light tracking-wide uppercase">by</span>
+            <Link 
+              href="https://zariosconstruction.com" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 group transition-all duration-300 hover:scale-105"
+            >
+              <img 
+                src="/logos/Zarios_logo.png" 
+                alt="Zarios Construction" 
+                className="h-8 md:h-10 object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-300"
+              />
+              <span className="text-sm md:text-base text-[#8A8A8A] font-raleway font-light tracking-wide group-hover:text-[#B8935A] transition-colors duration-300">
+                Zarios Construction
+              </span>
+            </Link>
+          </motion.div>
           
           <motion.p
             initial={{ opacity: 0, x: -30 }}

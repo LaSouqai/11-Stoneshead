@@ -53,8 +53,8 @@ export default function OutdoorSection() {
       >
         <div className="w-[90%] mx-auto rounded-2xl overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.20)]">
           <img
-            src="/gallery/4.jpg"
-            alt="Outdoor living space"
+            src="/gallery/Exterior_Backyard_Pool.jpg"
+            alt="Backyard pool and outdoor living"
             className="w-full h-[500px] md:h-[600px] object-cover"
           />
         </div>

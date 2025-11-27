@@ -7,12 +7,12 @@ import { motion } from "framer-motion"
 
 export default function GalleryPreview() {
   const galleryImages = [
-    "/gallery/1.jpg",
-    "/gallery/2.jpg",
-    "/gallery/3.jpg",
-    "/gallery/4.jpg",
-    "/gallery/5.jpg",
-    "/gallery/6.jpg",
+    "/gallery/Exterior_Entrance_south_facing.jpg",
+    "/gallery/Interior_Living_space.png",
+    "/gallery/Interior_Kitchen.png",
+    "/gallery/Exterior_Backyard_Pool.jpg",
+    "/gallery/Interior_Floating_Staircase.png",
+    "/gallery/Interior_primary_suite_bedroom_view.png",
   ]
 
   return (

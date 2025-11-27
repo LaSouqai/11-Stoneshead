@@ -12,25 +12,37 @@ import Link from "next/link"
 /*   GALLERY IMAGE ARRAYS (Exterior + Interior)              */
 /* --------------------------------------------------------- */
 const exteriorImages = [
-  "/gallery/exterior1.jpg",
-  "/gallery/exterior2.jpg",
-  "/gallery/exterior3.jpg",
-  "/gallery/exterior4.jpg",
-  "/gallery/exterior5.jpg",
-  "/gallery/exterior6.jpg",
+  { src: "/gallery/Exterior_Entrance_south_facing.jpg", desc: "Entrance South Facing" },
+  { src: "/gallery/Exterior_Entrance_Cul_de_sac.jpg", desc: "Entrance Cul-de-sac" },
+  { src: "/gallery/Exterior_Entrance_Side_View.jpg", desc: "Entrance Side View" },
+  { src: "/gallery/Exterior_Driveway.jpg", desc: "Driveway" },
+  { src: "/gallery/Exterior_Backyard_Pool.jpg", desc: "Backyard Pool" },
+  { src: "/gallery/Exterior_Backyard_Eastside.jpg", desc: "Backyard Eastside" },
+  { src: "/gallery/Exterior_sideyard.jpg", desc: "Sideyard" },
+  { src: "/gallery/Exterior_Lot_view.jpg", desc: "Lot View" },
 ]
 
 const interiorImages = [
-  "/gallery/interior1.jpg",
-  "/gallery/interior2.jpg",
-  "/gallery/interior3.jpg",
-  "/gallery/interior4.jpg",
-  "/gallery/interior5.jpg",
-  "/gallery/interior6.jpg",
+  { src: "/gallery/Interior_Living_space.png", desc: "Living Space" },
+  { src: "/gallery/Interior_Kitchen.png", desc: "Kitchen" },
+  { src: "/gallery/Interior_kitchen_Nook.png", desc: "Kitchen Nook" },
+  { src: "/gallery/Interior_dining_area.png", desc: "Dining Area" },
+  { src: "/gallery/Interior_Floating_Staircase.png", desc: "Floating Staircase" },
+  { src: "/gallery/Interior_media_room_theatre.png", desc: "Media Room Theatre" },
+  { src: "/gallery/Interior_media_room_theatre_screen.png", desc: "Theatre Screen" },
+  { src: "/gallery/Interior_media_room_game_room.png", desc: "Media Room Game Room" },
+  { src: "/gallery/Interior_primary_suite_bedroom.png", desc: "Primary Suite Bedroom" },
+  { src: "/gallery/Interior_primary_suite_bedroom_view.png", desc: "Bedroom View" },
+  { src: "/gallery/Interior_primary_suite_private Hallway.png", desc: "Private Hallway" },
+  { src: "/gallery/Interior_primary_suite_boutique_closet.png", desc: "Boutique Closet" },
+  { src: "/gallery/Interior_primary_suite_boutique_closet_side.png", desc: "Closet Side View" },
+  { src: "/gallery/Interior_Primary_Suite_Floating_vanity.png", desc: "Floating Vanity" },
+  { src: "/gallery/Interior_Primary_Suite_FLoating_double_Vanity.png", desc: "Floating Double Vanity" },
+  { src: "/gallery/Interior_Primary_suite_Shower.png", desc: "Primary Suite Shower" },
 ]
 
 export default function Home() {
-  const [selectedImage, setSelectedImage] = useState<string | null>(null)
+  const [selectedImage, setSelectedImage] = useState<{ src: string; desc: string } | null>(null)
   const [loaded, setLoaded] = useState(false)
   const [activeTab, setActiveTab] = useState<"exterior" | "interior">("exterior")
   const [videoPlaying, setVideoPlaying] = useState(false)
@@ -38,6 +50,7 @@ export default function Home() {
   const [showSanctuary, setShowSanctuary] = useState(true)
   const [showVideo, setShowVideo] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
 
   const { scrollY } = useScroll()
   const parallaxY = useTransform(scrollY, [0, 500], [0, 75]) // Subtle parallax
@@ -53,6 +66,15 @@ export default function Home() {
     checkMobile()
     window.addEventListener('resize', checkMobile)
     return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
+  // Hide gold frame when scrolling (all devices)
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10)
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
   // Black screen intro
@@ -76,7 +98,7 @@ export default function Home() {
     // Phase 3: Sanctuary text fades out during rise
     const sanctuaryFadeOutTimer = setTimeout(() => {
       setShowSanctuary(false)
-    }, 5000) // Fades out at 5.0s (1.5s pause + 3.5s into rise)
+    }, 3500) // Fades out at 3.5s (1.5s pause + 2.0s into rise)
 
     return () => {
       clearTimeout(initialFadeInTimer)
@@ -95,8 +117,12 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-charcoal text-stone relative">
-      {/* Thin gold frame around the page with rounded corners */}
-      <div className="fixed inset-2 md:inset-4 border border-[#B8935A]/30 rounded-2xl md:rounded-3xl pointer-events-none z-[100]" />
+      {/* Thin gold frame around the page with rounded corners - hides on scroll */}
+      <div 
+        className={`fixed inset-2 md:inset-4 border border-[#B8935A]/30 rounded-2xl md:rounded-3xl pointer-events-none z-[100] transition-opacity duration-300 ${
+          scrolled ? 'opacity-0' : 'opacity-100'
+        }`} 
+      />
       
       {/* ✅ FLOATING PANEL (includes Explore button) */}
       <FloatingPanel />
@@ -321,17 +347,27 @@ export default function Home() {
           </button>
         </div>
 
-        <div className="grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-8 max-w-6xl mx-auto">
-          {(activeTab === "exterior" ? exteriorImages : interiorImages).map((src, index) => (
-            <motion.img
+        <div className="grid grid-cols-2 gap-6 md:grid-cols-3 md:gap-10 max-w-6xl mx-auto">
+          {(activeTab === "exterior" ? exteriorImages : interiorImages).map((item, index) => (
+            <motion.div
               key={index}
-              src={src}
-              onClick={() => setSelectedImage(src)}
-              whileHover={{ scale: 1.02, boxShadow: "0 0 40px rgba(0,0,0,0.3)" }}
-              transition={{ duration: 0.3 }}
-              className="rounded-2xl cursor-pointer object-cover w-full h-40 md:h-64 lg:h-80 shadow-soft"
-              alt={`Property image ${index + 1}`}
-            />
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="flex flex-col gap-3"
+            >
+              <motion.img
+                src={item.src}
+                onClick={() => setSelectedImage(item)}
+                whileHover={{ scale: 1.02, boxShadow: "0 0 40px rgba(0,0,0,0.3)" }}
+                transition={{ duration: 0.3 }}
+                className="rounded-2xl cursor-pointer object-cover w-full h-40 md:h-64 lg:h-80 shadow-soft"
+                alt={item.desc}
+              />
+              <p className="text-center text-[#B8935A] text-xs md:text-sm font-raleway font-light tracking-wider uppercase">
+                {item.desc}
+              </p>
+            </motion.div>
           ))}
         </div>
 
@@ -342,16 +378,25 @@ export default function Home() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setSelectedImage(null)}
-              className="fixed inset-0 bg-black/80 backdrop-blur-lg flex items-center justify-center z-[60] p-4 cursor-pointer"
+              className="fixed inset-0 bg-black/80 backdrop-blur-lg flex flex-col items-center justify-center z-[60] p-4 cursor-pointer"
             >
               <motion.img
                 initial={{ scale: 0.8, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.8, opacity: 0 }}
-                src={selectedImage}
-                className="max-w-full max-h-full rounded-lg shadow-soft"
-                alt="Selected property image"
+                src={selectedImage.src}
+                className="max-w-full max-h-[85vh] rounded-lg shadow-soft"
+                alt={selectedImage.desc}
               />
+              <motion.p
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 10 }}
+                transition={{ delay: 0.2 }}
+                className="mt-6 text-[#B8935A] text-base md:text-lg font-raleway font-light tracking-wider uppercase"
+              >
+                {selectedImage.desc}
+              </motion.p>
             </motion.div>
           )}
         </AnimatePresence>
@@ -363,7 +408,7 @@ export default function Home() {
       <section id="instagram" className="section">
         <h2 className="text-3xl mb-12 text-gold font-cormorant text-center">Instagram</h2>
         <p className="text-center text-stone/80 mb-8 max-w-2xl mx-auto">
-          Follow @lasouq.luxury for the latest updates and exclusive content.
+          Follow the Build
         </p>
         <InstagramCarousel />
       </section>

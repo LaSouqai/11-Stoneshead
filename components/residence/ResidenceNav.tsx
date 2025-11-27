@@ -14,6 +14,7 @@ const sections = [
   { id: "engineering", label: "Engineering" },
   { id: "floorplans", label: "Floor Plans" },
   { id: "gallery", label: "Gallery" },
+  { id: "builder", label: "Builder" },
   { id: "downloads", label: "Downloads" },
   { id: "contact", label: "Contact" },
 ]

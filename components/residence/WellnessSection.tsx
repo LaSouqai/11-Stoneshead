@@ -8,27 +8,33 @@ export default function WellnessSection() {
   const amenities = [
     {
       title: "Theater Room",
-      description: "Dedicated cinema with recessed slab foundation for optimal acoustics and seating."
+      description: "Dedicated cinema with recessed slab foundation for optimal acoustics and seating.",
+      image: "/gallery/Interior_media_room_theatre.png"
     },
     {
       title: "Game Room",
-      description: "Flexible entertainment space designed for recreation and gathering."
+      description: "Flexible entertainment space designed for recreation and gathering.",
+      image: "/gallery/Interior_media_room_game_room.png"
     },
     {
       title: "Wine Room",
-      description: "Climate-controlled wine storage with display and tasting area."
+      description: "Climate-controlled wine storage with display and tasting area.",
+      image: "/gallery/Interior_living_Space_Wine_room.jpg"
     },
     {
       title: "Fitness Room with Cold Plunge Prep",
-      description: "Fully plumbed fitness space ready for cold plunge installation and wellness routines."
+      description: "Fully plumbed fitness space ready for cold plunge installation and wellness routines.",
+      image: "/gallery/Interior_primary_suite_bedroom_view.png"
     },
     {
       title: "Whole-House Sound System",
-      description: "Integrated audio throughout all living spaces for seamless entertainment."
+      description: "Integrated audio throughout all living spaces for seamless entertainment.",
+      image: "/gallery/Interior_media_room_theatre_screen.png"
     },
     {
       title: "Bioethanol Fireplace",
-      description: "Ventless modern fireplace providing ambiance without traditional venting requirements."
+      description: "Ventless modern fireplace providing ambiance without traditional venting requirements.",
+      image: "/gallery/Interior_living_space_Fireplace.png"
     }
   ]
 
@@ -52,7 +58,7 @@ export default function WellnessSection() {
           >
             <div className="aspect-[4/3] bg-gray-100 rounded-2xl overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.2)] group-hover:shadow-[0_25px_70px_rgba(0,0,0,0.25)] transition-all duration-500">
               <img
-                src={`/gallery/${index < 6 ? index + 1 : (index % 6) + 1}.jpg`}
+                src={amenity.image}
                 alt={amenity.title}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />

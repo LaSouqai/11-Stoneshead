@@ -53,8 +53,8 @@ export default function ArchitectureSection() {
       >
         <div className="w-[90%] mx-auto rounded-2xl overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.20)]">
           <img
-            src="/gallery/1.jpg"
-            alt="Architectural exterior"
+            src="/gallery/Exterior_Lot_view.jpg"
+            alt="Architectural exterior lot view"
             className="w-full h-[500px] md:h-[600px] object-cover"
           />
         </div>
