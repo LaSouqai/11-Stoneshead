@@ -19,7 +19,7 @@ export default function DownloadsSection() {
       description: "Dimensioned plans for Level 1 and Level 2",
       fileSize: "2.4 MB",
       fileType: "PDF",
-      href: "/downloads/floorplans.pdf"
+      href: "/pdf/1and2floor plan.pdf"
     },
     {
       title: "Material Board",
