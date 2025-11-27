@@ -1,7 +1,6 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { typography } from "@/src/styles/theme"
 
 interface LuxuryTaglineProps {
   children: React.ReactNode
@@ -14,23 +13,29 @@ export default function LuxuryTagline({
   className = "",
   animate = true 
 }: LuxuryTaglineProps) {
-  const baseClass = typography.tagline.default
-  const fullClass = `${baseClass} text-[#8A8A8A] mb-6 ${className}`
+  const content = (
+    <div className={`flex items-center justify-center gap-4 mb-8 ${className}`}>
+      <div className="h-[1px] w-12 bg-gradient-to-r from-transparent to-[#B8935A]/30" />
+      <span className="text-sm md:text-base tracking-[0.2em] uppercase font-light text-[#B8935A]">
+        {children}
+      </span>
+      <div className="h-[1px] w-12 bg-gradient-to-l from-transparent to-[#B8935A]/30" />
+    </div>
+  )
 
   if (!animate) {
-    return <p className={fullClass}>{children}</p>
+    return content
   }
 
   return (
-    <motion.p
+    <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className={fullClass}
     >
-      {children}
-    </motion.p>
+      {content}
+    </motion.div>
   )
 }
 
