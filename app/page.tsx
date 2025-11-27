@@ -253,7 +253,7 @@ export default function Home() {
       <div className="hr-gold" />
 
       {/* RESIDENCE SECTION */}
-      <section id="residence-intro" className="section max-w-6xl mx-auto px-6 py-20 md:py-32 text-center">
+      <section id="residence-intro" className="section max-w-6xl mx-auto px-6 py-20 md:py-32 text-center relative">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -307,6 +307,9 @@ export default function Home() {
             </Link>
           </motion.div>
         </motion.div>
+
+        {/* Scroll cue */}
+        <ScrollCue />
       </section>
 
       <div className="hr-gold" />

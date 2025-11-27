@@ -78,20 +78,20 @@ export default function ResidenceHero() {
             </p>
           </motion.div>
         </motion.div>
-
-        {/* Scroll indicator - matches landing page */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1, duration: 0.6 }}
-          className="absolute -bottom-48 left-0 right-0 hidden md:flex justify-center"
-        >
-          <div className="flex flex-col items-center text-[#8A8A8A] text-xs tracking-widest">
-            <span>SCROLL</span>
-            <span className="mt-2 w-[1px] h-8 bg-[#B8935A]/60 animate-pulse" />
-          </div>
-        </motion.div>
       </div>
+
+      {/* Scroll indicator - matches landing page */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1, duration: 0.6 }}
+        className="absolute bottom-8 left-0 right-0 hidden md:flex justify-center z-10"
+      >
+        <div className="flex flex-col items-center text-[#8A8A8A] text-xs tracking-widest">
+          <span>SCROLL</span>
+          <span className="mt-2 w-[1px] h-8 bg-[#B8935A]/60 animate-pulse" />
+        </div>
+      </motion.div>
     </section>
   )
 }
