@@ -167,14 +167,14 @@ export default function Home() {
             onPlay={handleVideoPlay}
             className="absolute inset-0 w-full h-full object-cover"
             initial={{ opacity: 0 }}
-            animate={showVideo ? { opacity: 0.6 } : { opacity: 0 }} // Video fades in after black screen
+            animate={showVideo ? { opacity: 0.8 } : { opacity: 0 }} // Video fades in after black screen (lighter)
             transition={{ duration: 0.7, ease: "easeOut", delay: 1.5 }}
             src="/drone-footage.mp4"
           />
         </motion.div>
 
-        {/* Deep gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/25 to-transparent" />
+        {/* Lighter gradient overlay - showcases the Strip view */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-black/15 to-transparent" />
 
         {/* Hero text container - moves up smoothly */}
         <motion.div
@@ -251,7 +251,7 @@ export default function Home() {
           </p>
           <div className="max-w-3xl mx-auto">
             <p className="text-stone/80 text-base md:text-lg leading-relaxed font-raleway font-light tracking-wide mb-12">
-              Spanning 9,747 square feet across two meticulously designed levels, 11 Stoneshead represents the convergence of commercial-grade engineering, luxury construction quality, and architectural vision. Every material, system, and detail has been selected to create an enduring modern masterpiece.
+              Spanning 9,747 square feet across two meticulously designed levels, 11 Stoneshead represents the convergence of commercial-grade engineering, luxury construction quality, natural stone cladding, and architectural vision. Every material, system, and detail has been selected to create an enduring modern masterpiece.
             </p>
           </div>
           <motion.div

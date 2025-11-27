@@ -73,7 +73,7 @@ export default function ResidenceHero() {
           >
             <p className="text-base md:text-lg tracking-wide leading-relaxed font-normal text-[#6A6A6A]">
               Spanning 9,747 square feet across two meticulously designed levels, 11 Stoneshead represents 
-              the convergence of commercial-grade engineering, luxury construction quality, and architectural vision. 
+              the convergence of commercial-grade engineering, luxury construction quality, natural stone cladding, and architectural vision. 
               Every material, system, and detail has been selected to create an enduring modern masterpiece.
             </p>
           </motion.div>

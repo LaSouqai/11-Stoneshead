@@ -76,7 +76,7 @@ export default function FloatingPanel() {
       <div className="absolute top-0 bottom-0 w-[1px] bg-gradient-to-b from-transparent via-[#B8935A]/20 to-transparent -z-10" />
 
       {/* Top Panel */}
-      <div className="relative bg-black/35 backdrop-blur-xl border border-[#B8935A]/30 rounded-2xl px-2.5 pt-2.5 pb-8 shadow-[0_8px_32px_rgba(0,0,0,0.3)] flex flex-col gap-2 z-0">
+      <div className="relative bg-black/25 backdrop-blur-xl border border-[#B8935A]/30 rounded-2xl px-2.5 pt-2.5 pb-8 shadow-[0_8px_32px_rgba(0,0,0,0.3)] flex flex-col gap-2 z-0">
         {topIcons.map((item) => (
           <button
             key={item.id}
@@ -190,7 +190,7 @@ export default function FloatingPanel() {
       </div>
 
       {/* Bottom Panel */}
-      <div className="relative bg-black/35 backdrop-blur-xl border border-[#B8935A]/30 rounded-2xl px-2.5 pt-8 pb-2.5 shadow-[0_8px_32px_rgba(0,0,0,0.3)] flex flex-col gap-2 z-0">
+      <div className="relative bg-black/25 backdrop-blur-xl border border-[#B8935A]/30 rounded-2xl px-2.5 pt-8 pb-2.5 shadow-[0_8px_32px_rgba(0,0,0,0.3)] flex flex-col gap-2 z-0">
         {bottomIcons.map((item) => (
           <button
             key={item.id}
@@ -273,7 +273,7 @@ export default function FloatingPanel() {
       <div className="absolute left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#B8935A]/20 to-transparent top-1/2 -z-10" />
 
       {/* Left Panel */}
-      <div className="relative bg-black/35 backdrop-blur-xl border border-[#B8935A]/30 pl-3 pr-2.5 py-2.5 rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.3)] flex gap-3 z-0">
+      <div className="relative bg-black/25 backdrop-blur-xl border border-[#B8935A]/30 pl-3 pr-2.5 py-2.5 rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.3)] flex gap-3 z-0">
         {mobileLeftIcons.map((item) => (
           <button
             key={item.id}
@@ -348,7 +348,7 @@ export default function FloatingPanel() {
       </div>
 
       {/* Right Panel */}
-      <div className="relative bg-black/35 backdrop-blur-xl border border-[#B8935A]/30 pl-2.5 pr-3 py-2.5 rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.3)] flex gap-3 z-0">
+      <div className="relative bg-black/25 backdrop-blur-xl border border-[#B8935A]/30 pl-2.5 pr-3 py-2.5 rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.3)] flex gap-3 z-0">
         {mobileRightIcons.map((item) => (
           <button
             key={item.id}

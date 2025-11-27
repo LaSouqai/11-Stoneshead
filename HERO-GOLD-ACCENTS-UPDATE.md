@@ -320,3 +320,4 @@ The homepage hero now features:
 **Gold Accents**: ✅ Applied throughout  
 **Visual Balance**: ✅ Luxury + Strip focus  
 
+
