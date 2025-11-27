@@ -13,7 +13,7 @@ export default function FloorPlansSection() {
   const plans = {
     1: {
       title: "Level 1",
-      image: "/gallery/first floor plan.png",
+      image: "/gallery/first floor plan(1)(1).jpg",
       pdfLink: "/pdf/First Floor Plan.pdf",
       details: "Main living areas, kitchen, primary suite, and garage"
     },
