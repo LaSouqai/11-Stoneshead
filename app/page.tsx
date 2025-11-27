@@ -206,6 +206,10 @@ export default function Home() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6, duration: 1 }}
             className="mt-6 text-base md:text-lg text-[#B8935A] font-raleway font-light tracking-[0.15em] uppercase flex flex-wrap justify-center gap-2 w-full"
+            style={{
+              textShadow: '0 0 30px rgba(0,0,0,0.9), 0 0 15px rgba(0,0,0,0.8), 0 2px 8px rgba(0,0,0,0.7), 0 4px 20px rgba(0,0,0,0.6)',
+              filter: 'drop-shadow(0 0 20px rgba(0,0,0,0.8))'
+            }}
           >
             <span>11 STONESHEAD CT</span>
             <span className="text-[#B8935A]">·</span>
@@ -221,11 +225,24 @@ export default function Home() {
             transition={{ delay: 1.2, duration: 0.5 }}
             className="mt-8 flex items-center justify-center gap-4 w-full"
           >
-            <div className="h-[1px] w-14 bg-gradient-to-r from-transparent to-[#B8935A]/50" />
-            <span className="text-[#B8935A] text-xl md:text-2xl tracking-[0.3em] font-raleway font-light uppercase">
+            <div className="h-[1px] w-14 bg-gradient-to-r from-transparent to-[#B8935A]/50" 
+              style={{
+                filter: 'drop-shadow(0 0 8px rgba(0,0,0,0.8))'
+              }}
+            />
+            <span className="text-[#B8935A] text-xl md:text-2xl tracking-[0.3em] font-raleway font-light uppercase"
+              style={{
+                textShadow: '0 0 30px rgba(0,0,0,0.9), 0 0 15px rgba(0,0,0,0.8), 0 2px 8px rgba(0,0,0,0.7), 0 4px 20px rgba(0,0,0,0.6)',
+                filter: 'drop-shadow(0 0 20px rgba(0,0,0,0.8))'
+              }}
+            >
               Ascaya
             </span>
-            <div className="h-[1px] w-14 bg-gradient-to-l from-transparent to-[#B8935A]/50" />
+            <div className="h-[1px] w-14 bg-gradient-to-l from-transparent to-[#B8935A]/50"
+              style={{
+                filter: 'drop-shadow(0 0 8px rgba(0,0,0,0.8))'
+              }}
+            />
           </motion.div>
         </motion.div>
 
