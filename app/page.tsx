@@ -496,11 +496,11 @@ export default function Home() {
               className="w-full px-4 py-3 bg-black/20 border border-gold/30 rounded-md text-stone focus:outline-none focus:border-gold resize-none"
             />
           </div>
-          <div className="w-full pt-2 flex flex-col items-center gap-4">
+          <div className="text-center pt-2 space-y-4">
             <button
               type="submit"
               disabled={contactStatus === "submitting"}
-              className="group relative px-8 py-3 bg-gold text-black rounded-md text-sm font-raleway uppercase tracking-wide
+              className="inline-flex items-center justify-center px-8 py-3 bg-gold text-black rounded-md text-sm font-raleway uppercase tracking-wide
                          hover:bg-gold/90 hover:shadow-lg transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
             >
               {contactStatus === "submitting" ? "Sending..." : "Submit"}
