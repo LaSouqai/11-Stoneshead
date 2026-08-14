@@ -115,25 +115,27 @@ export default function ContactSection() {
             />
           </div>
 
-          <button
-            type="submit"
-            disabled={status === "submitting"}
-            className="w-full px-10 py-4 rounded-full text-sm tracking-[0.2em] uppercase
-                       bg-gradient-to-r from-[#C7A76A] to-[#E2D3AC]
-                       text-black/80 backdrop-blur-xl
-                       hover:scale-[1.03] hover:shadow-[0_0_20px_rgba(199,167,106,0.45)]
-                       transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100"
-          >
-            {status === "submitting" ? "Sending..." : "Send Inquiry"}
-          </button>
-          {status === "success" && (
-            <p className="text-center text-[#1A1A1A] text-sm font-light">
-              Thank you. We&apos;ll be in touch shortly.
-            </p>
-          )}
-          {status === "error" && (
-            <p className="text-center text-red-600/90 text-sm font-light">{error}</p>
-          )}
+          <div className="flex flex-col items-center gap-4">
+            <button
+              type="submit"
+              disabled={status === "submitting"}
+              className="px-10 py-4 rounded-full text-sm tracking-[0.2em] uppercase
+                         bg-gradient-to-r from-[#C7A76A] to-[#E2D3AC]
+                         text-black/80 backdrop-blur-xl
+                         hover:scale-[1.03] hover:shadow-[0_0_20px_rgba(199,167,106,0.45)]
+                         transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100"
+            >
+              {status === "submitting" ? "Sending..." : "Send Inquiry"}
+            </button>
+            {status === "success" && (
+              <p className="text-center text-[#1A1A1A] text-sm font-light">
+                Thank you. We&apos;ll be in touch shortly.
+              </p>
+            )}
+            {status === "error" && (
+              <p className="text-center text-red-600/90 text-sm font-light">{error}</p>
+            )}
+          </div>
         </form>
 
         <p className="text-center mt-8 text-[#8A8A8A] text-sm font-light">

@@ -496,20 +496,22 @@ export default function Home() {
               className="w-full px-4 py-3 bg-black/20 border border-gold/30 rounded-md text-stone focus:outline-none focus:border-gold resize-none"
             />
           </div>
-          <button
-            type="submit"
-            disabled={contactStatus === "submitting"}
-            className="group relative px-8 py-3 bg-gold text-black rounded-md text-sm font-raleway uppercase tracking-wide
-                       hover:bg-gold/90 hover:shadow-lg transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
-          >
-            {contactStatus === "submitting" ? "Sending..." : "Submit"}
-          </button>
-          {contactStatus === "success" && (
-            <p className="text-center text-gold/90 text-sm">Thank you. We&apos;ll be in touch shortly.</p>
-          )}
-          {contactStatus === "error" && (
-            <p className="text-center text-red-400/90 text-sm">{contactError}</p>
-          )}
+          <div className="w-full pt-2 flex flex-col items-center gap-4">
+            <button
+              type="submit"
+              disabled={contactStatus === "submitting"}
+              className="group relative px-8 py-3 bg-gold text-black rounded-md text-sm font-raleway uppercase tracking-wide
+                         hover:bg-gold/90 hover:shadow-lg transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
+            >
+              {contactStatus === "submitting" ? "Sending..." : "Submit"}
+            </button>
+            {contactStatus === "success" && (
+              <p className="text-center text-gold/90 text-sm">Thank you. We&apos;ll be in touch shortly.</p>
+            )}
+            {contactStatus === "error" && (
+              <p className="text-center text-red-400/90 text-sm">{contactError}</p>
+            )}
+          </div>
         </form>
         <p className="text-center mt-8 text-stone/70 text-sm">
           Or call directly:{" "}
