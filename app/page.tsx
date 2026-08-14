@@ -7,6 +7,7 @@ import InstagramCarousel from "@/components/InstagramCarousel"
 import Footer from "@/components/Footer"
 import FloatingPanel from "@/components/FloatingPanel"
 import Link from "next/link"
+import { CONTACT_PHONE, CONTACT_PHONE_HREF, submitContactInquiry } from "@/lib/contact"
 
 /* --------------------------------------------------------- */
 /*   GALLERY IMAGE ARRAYS (Exterior + Interior)              */
@@ -51,6 +52,9 @@ export default function Home() {
   const [showVideo, setShowVideo] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [contactForm, setContactForm] = useState({ name: "", email: "", message: "" })
+  const [contactStatus, setContactStatus] = useState<"idle" | "submitting" | "success" | "error">("idle")
+  const [contactError, setContactError] = useState("")
 
   const { scrollY } = useScroll()
   const parallaxY = useTransform(scrollY, [0, 500], [0, 75]) // Subtle parallax
@@ -113,6 +117,23 @@ export default function Home() {
 
   const toContact = () => {
     document.getElementById("contact")?.scrollIntoView({ behavior: "smooth", block: "start" })
+  }
+
+  const handleContactSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setContactStatus("submitting")
+    setContactError("")
+
+    const result = await submitContactInquiry(contactForm)
+
+    if (result.success) {
+      setContactForm({ name: "", email: "", message: "" })
+      setContactStatus("success")
+      return
+    }
+
+    setContactError(result.error)
+    setContactStatus("error")
   }
 
   return (
@@ -441,27 +462,61 @@ export default function Home() {
         <p className="text-center text-stone/80 mb-8 max-w-2xl mx-auto">
           Reach out to schedule a private tour or for more information.
         </p>
-        <form className="max-w-xl mx-auto space-y-6">
+        <form className="max-w-xl mx-auto space-y-6" onSubmit={handleContactSubmit}>
           <div>
             <label htmlFor="name" className="block text-sm text-gold/80 mb-2">Name</label>
-            <input type="text" id="name" className="w-full px-4 py-3 bg-black/20 border border-gold/30 rounded-md text-stone focus:outline-none focus:border-gold" />
+            <input
+              type="text"
+              id="name"
+              required
+              value={contactForm.name}
+              onChange={(e) => setContactForm((prev) => ({ ...prev, name: e.target.value }))}
+              className="w-full px-4 py-3 bg-black/20 border border-gold/30 rounded-md text-stone focus:outline-none focus:border-gold"
+            />
           </div>
           <div>
             <label htmlFor="email" className="block text-sm text-gold/80 mb-2">Email</label>
-            <input type="email" id="email" className="w-full px-4 py-3 bg-black/20 border border-gold/30 rounded-md text-stone focus:outline-none focus:border-gold" />
+            <input
+              type="email"
+              id="email"
+              required
+              value={contactForm.email}
+              onChange={(e) => setContactForm((prev) => ({ ...prev, email: e.target.value }))}
+              className="w-full px-4 py-3 bg-black/20 border border-gold/30 rounded-md text-stone focus:outline-none focus:border-gold"
+            />
           </div>
           <div>
             <label htmlFor="message" className="block text-sm text-gold/80 mb-2">Message</label>
-            <textarea id="message" rows={5} className="w-full px-4 py-3 bg-black/20 border border-gold/30 rounded-md text-stone focus:outline-none focus:border-gold resize-none"></textarea>
+            <textarea
+              id="message"
+              rows={5}
+              required
+              value={contactForm.message}
+              onChange={(e) => setContactForm((prev) => ({ ...prev, message: e.target.value }))}
+              className="w-full px-4 py-3 bg-black/20 border border-gold/30 rounded-md text-stone focus:outline-none focus:border-gold resize-none"
+            />
           </div>
           <button
             type="submit"
+            disabled={contactStatus === "submitting"}
             className="group relative px-8 py-3 bg-gold text-black rounded-md text-sm font-raleway uppercase tracking-wide
-                       hover:bg-gold/90 hover:shadow-lg transition-all duration-300"
+                       hover:bg-gold/90 hover:shadow-lg transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
           >
-            Submit
+            {contactStatus === "submitting" ? "Sending..." : "Submit"}
           </button>
+          {contactStatus === "success" && (
+            <p className="text-center text-gold/90 text-sm">Thank you. We&apos;ll be in touch shortly.</p>
+          )}
+          {contactStatus === "error" && (
+            <p className="text-center text-red-400/90 text-sm">{contactError}</p>
+          )}
         </form>
+        <p className="text-center mt-8 text-stone/70 text-sm">
+          Or call directly:{" "}
+          <a href={CONTACT_PHONE_HREF} className="text-gold hover:underline">
+            {CONTACT_PHONE}
+          </a>
+        </p>
       </section>
 
       <Footer />
