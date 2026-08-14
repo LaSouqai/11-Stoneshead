@@ -1,31 +1,31 @@
 import "./globals.css"
-import { Cormorant_Garamond, Raleway } from "next/font/google"
-
-const cormorant = Cormorant_Garamond({ 
-  subsets: ["latin"], 
-  weight: ["300", "400", "500", "600"],
-  variable: "--font-cormorant" 
-})
-const raleway = Raleway({ 
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
-  variable: "--font-raleway" 
-})
+import AnalyticsProvider from "@/components/AnalyticsProvider"
+import { homepageMetadata } from "@/lib/seo"
 
 export const metadata = {
-  title: "Ascaya Residence · A Sanctuary Above the Strip",
-  description: "Ultra-luxury modern residence above the Las Vegas Strip.",
+  ...homepageMetadata,
+  metadataBase: new URL("https://11stoneshead.luxury"),
+  icons: {
+    icon: "/logos/ascaya.svg",
+    apple: "/logos/ascaya.png",
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${raleway.variable} ${cormorant.variable}`}>
-      <body className="font-raleway">{children}</body>
+    <html lang="en">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Raleway:wght@300;400;500;600&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body className="font-raleway">
+        <AnalyticsProvider />
+        {children}
+      </body>
     </html>
   )
 }
-
-
-
-
-

@@ -3,6 +3,7 @@
 import SectionContainer from "./SectionContainer"
 import SectionHeader from "./SectionHeader"
 import { motion } from "framer-motion"
+import { trackFloorPlanDownload } from "@/lib/analytics"
 
 interface Download {
   title: string
@@ -34,13 +35,6 @@ export default function DownloadsSection() {
       fileSize: "1.8 MB",
       fileType: "PDF",
       href: "/pdf/Spec Sheet.pdf"
-    },
-    {
-      title: "Construction Set",
-      description: "Sanitized construction drawings (select sheets)",
-      fileSize: "12.3 MB",
-      fileType: "PDF",
-      href: "/downloads/construction-set.pdf"
     }
   ]
 
@@ -63,6 +57,7 @@ export default function DownloadsSection() {
             viewport={{ once: true }}
             className="group p-10 bg-white border border-gray-200 rounded-2xl hover:shadow-[0_20px_60px_rgba(0,0,0,0.15)] hover:border-[#1A1A1A] hover:scale-[1.02] transition-all duration-500"
             download
+            onClick={() => trackFloorPlanDownload(download.title)}
           >
             <div className="flex items-start justify-between mb-4">
               <div className="flex-1">
@@ -105,7 +100,7 @@ export default function DownloadsSection() {
         viewport={{ once: true }}
         className="text-center mt-12 text-[#8A8A8A] text-sm font-light"
       >
-        All documents are provided for informational purposes. For full construction documentation, please contact us directly.
+        All documents are provided for informational purposes. For additional documentation, please contact us directly.
       </motion.p>
     </SectionContainer>
   )

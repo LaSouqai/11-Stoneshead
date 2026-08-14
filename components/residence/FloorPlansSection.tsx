@@ -5,6 +5,7 @@ import SectionContainer from "./SectionContainer"
 import SectionHeader from "./SectionHeader"
 import { motion, AnimatePresence } from "framer-motion"
 import { Download } from "lucide-react"
+import { trackFloorPlanDownload } from "@/lib/analytics"
 
 export default function FloorPlansSection() {
   const [activeLevel, setActiveLevel] = useState<1 | 2>(1)
@@ -15,7 +16,7 @@ export default function FloorPlansSection() {
       title: "Level 1",
       image: "/gallery/first floor plan(1)(1).jpg",
       pdfLink: "/pdf/First Floor Plan.pdf",
-      details: "Main living areas, kitchen, primary suite, and garage"
+      details: "Main living areas, kitchen, and primary suite"
     },
     2: {
       title: "Level 2",
@@ -105,6 +106,7 @@ export default function FloorPlansSection() {
         <a
           href="/pdf/1and2floor plan.pdf"
           download
+          onClick={() => trackFloorPlanDownload("Floor Plans Combined")}
           className="inline-flex items-center gap-2 px-10 py-4 rounded-full text-sm tracking-[0.2em] uppercase
                      bg-gradient-to-r from-[#C7A76A] to-[#E2D3AC]
                      text-black/80 backdrop-blur-xl

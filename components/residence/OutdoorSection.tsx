@@ -17,7 +17,7 @@ export default function OutdoorSection() {
     },
     {
       title: "Outdoor Heaters",
-      description: "Integrated heating systems (design intent, pending final confirmation) for comfortable evening entertaining."
+      description: "Integrated heating systems designed for comfortable evening entertaining."
     },
     {
       title: "Outdoor Shower",

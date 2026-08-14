@@ -1,7 +1,9 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { Camera, Instagram, Mail, Phone, Box, Calendar, Home } from "lucide-react"
+import { Camera, Instagram, Mail, Phone, Box, Calendar } from "lucide-react"
+import { CONTACT_PHONE_HREF } from "@/lib/site"
+import { trackInstagramClick, trackPhoneClick } from "@/lib/analytics"
 
 export default function FloatingPanel() {
   const [visible, setVisible] = useState(true)
@@ -80,7 +82,12 @@ export default function FloatingPanel() {
         {topIcons.map((item) => (
           <button
             key={item.id}
-            onClick={() => scrollTo(item.id)}
+            type="button"
+            aria-label={item.label}
+            onClick={() => {
+              if (item.id === "instagram") trackInstagramClick()
+              scrollTo(item.id)
+            }}
             className="
               group relative p-2.5 rounded-xl
               text-[#B8935A]
@@ -139,7 +146,9 @@ export default function FloatingPanel() {
           }}
         >
           <button
-            onClick={() => window.location.href = "/residence"}
+            type="button"
+            aria-label="Explore the Residence page"
+            onClick={() => { window.location.href = "/residence" }}
             className="
               group relative
               w-[74px] h-[74px] flex items-center justify-center rounded-full 
@@ -194,9 +203,12 @@ export default function FloatingPanel() {
         {bottomIcons.map((item) => (
           <button
             key={item.id}
+            type="button"
+            aria-label={item.label}
             onClick={() => {
               if (item.id === "call") {
-                window.location.href = "tel:+17029030000"
+                trackPhoneClick("floating_panel")
+                window.location.href = CONTACT_PHONE_HREF
               } else if (item.id === "schedule") {
                 scrollTo("contact")
               } else {
@@ -277,7 +289,12 @@ export default function FloatingPanel() {
         {mobileLeftIcons.map((item) => (
           <button
             key={item.id}
-            onClick={() => scrollTo(item.id)}
+            type="button"
+            aria-label={item.id === "gallery" ? "Gallery" : item.id === "instagram" ? "Instagram" : "3D Tour"}
+            onClick={() => {
+              if (item.id === "instagram") trackInstagramClick()
+              scrollTo(item.id)
+            }}
             className="
               p-2 rounded-lg
               text-[#B8935A]
@@ -352,9 +369,12 @@ export default function FloatingPanel() {
         {mobileRightIcons.map((item) => (
           <button
             key={item.id}
+            type="button"
+            aria-label={item.id === "schedule" ? "Schedule" : item.id === "contact" ? "Contact" : "Call"}
             onClick={() => {
               if (item.id === "call") {
-                window.location.href = "tel:+17029030000"
+                trackPhoneClick("floating_panel_mobile")
+                window.location.href = CONTACT_PHONE_HREF
               } else if (item.id === "schedule") {
                 scrollTo("contact")
               } else {

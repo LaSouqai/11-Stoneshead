@@ -1,45 +1,11 @@
 "use client"
 
-import { useState } from "react"
+import ContactForm from "@/components/ContactForm"
 import SectionContainer from "./SectionContainer"
 import SectionHeader from "./SectionHeader"
 import { motion } from "framer-motion"
-import { CONTACT_PHONE, CONTACT_PHONE_HREF, submitContactInquiry } from "@/lib/contact"
 
 export default function ContactSection() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    message: ""
-  })
-  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle")
-  const [error, setError] = useState("")
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setStatus("submitting")
-    setError("")
-
-    const result = await submitContactInquiry(formData)
-
-    if (result.success) {
-      setFormData({ name: "", email: "", phone: "", message: "" })
-      setStatus("success")
-      return
-    }
-
-    setError(result.error)
-    setStatus("error")
-  }
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData(prev => ({
-      ...prev,
-      [e.target.name]: e.target.value
-    }))
-  }
-
   return (
     <SectionContainer id="contact" background="light">
       <SectionHeader
@@ -55,97 +21,8 @@ export default function ContactSection() {
         viewport={{ once: true }}
         className="max-w-2xl mx-auto"
       >
-        <form onSubmit={handleSubmit} className="space-y-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div>
-              <label htmlFor="name" className="block text-xs text-[#6A6A6A] mb-3 uppercase tracking-[0.15em] font-light">
-                Name
-              </label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-                className="w-full px-5 py-4 bg-white border border-gray-200 rounded-xl focus:outline-none focus:border-[#1A1A1A] focus:shadow-lg transition-all duration-300 font-light"
-              />
-            </div>
-            <div>
-              <label htmlFor="email" className="block text-xs text-[#6A6A6A] mb-3 uppercase tracking-[0.15em] font-light">
-                Email
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                className="w-full px-5 py-4 bg-white border border-gray-200 rounded-xl focus:outline-none focus:border-[#1A1A1A] focus:shadow-lg transition-all duration-300 font-light"
-              />
-            </div>
-          </div>
-
-          <div>
-            <label htmlFor="phone" className="block text-xs text-[#6A6A6A] mb-3 uppercase tracking-[0.15em] font-light">
-              Phone
-            </label>
-            <input
-              type="tel"
-              id="phone"
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              className="w-full px-5 py-4 bg-white border border-gray-200 rounded-xl focus:outline-none focus:border-[#1A1A1A] focus:shadow-lg transition-all duration-300 font-light"
-            />
-          </div>
-
-          <div>
-            <label htmlFor="message" className="block text-xs text-[#6A6A6A] mb-3 uppercase tracking-[0.15em] font-light">
-              Message
-            </label>
-            <textarea
-              id="message"
-              name="message"
-              value={formData.message}
-              onChange={handleChange}
-              rows={6}
-              className="w-full px-5 py-4 bg-white border border-gray-200 rounded-xl focus:outline-none focus:border-[#1A1A1A] focus:shadow-lg transition-all duration-300 resize-none font-light"
-            />
-          </div>
-
-          <div className="flex flex-col items-center gap-4">
-            <button
-              type="submit"
-              disabled={status === "submitting"}
-              className="px-10 py-4 rounded-full text-sm tracking-[0.2em] uppercase
-                         bg-gradient-to-r from-[#C7A76A] to-[#E2D3AC]
-                         text-black/80 backdrop-blur-xl
-                         hover:scale-[1.03] hover:shadow-[0_0_20px_rgba(199,167,106,0.45)]
-                         transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100"
-            >
-              {status === "submitting" ? "Sending..." : "Send Inquiry"}
-            </button>
-            {status === "success" && (
-              <p className="text-center text-[#1A1A1A] text-sm font-light">
-                Thank you. We&apos;ll be in touch shortly.
-              </p>
-            )}
-            {status === "error" && (
-              <p className="text-center text-red-600/90 text-sm font-light">{error}</p>
-            )}
-          </div>
-        </form>
-
-        <p className="text-center mt-8 text-[#8A8A8A] text-sm font-light">
-          Or call directly:{" "}
-          <a href={CONTACT_PHONE_HREF} className="text-[#1A1A1A] hover:underline">
-            {CONTACT_PHONE}
-          </a>
-        </p>
+        <ContactForm page="residence" variant="light" />
       </motion.div>
     </SectionContainer>
   )
 }
-

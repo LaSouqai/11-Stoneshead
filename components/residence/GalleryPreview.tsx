@@ -3,6 +3,7 @@
 import Link from "next/link"
 import SectionContainer from "./SectionContainer"
 import SectionHeader from "./SectionHeader"
+import RenderingDisclosure from "@/components/RenderingDisclosure"
 import { motion } from "framer-motion"
 
 export default function GalleryPreview() {
@@ -22,6 +23,7 @@ export default function GalleryPreview() {
         title="Gallery"
         subtitle="Explore the residence through curated imagery."
       />
+      <RenderingDisclosure className="text-[#8A8A8A] mb-8 max-w-3xl mx-auto" />
 
       <div className="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 w-[90%] mx-auto">
         {galleryImages.map((image, index) => (

@@ -6,6 +6,8 @@
   --bg: #0B0B0B;
   --text: #DAD6CF;
   --gold: #B8935A;
+  --font-raleway: "Raleway", sans-serif;
+  --font-cormorant: "Cormorant Garamond", serif;
 }
 
 html, body { 
@@ -147,5 +149,18 @@ p {
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+:focus-visible {
+  outline: 2px solid #B8935A;
+  outline-offset: 2px;
+}
 
 
