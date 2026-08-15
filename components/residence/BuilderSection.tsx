@@ -108,8 +108,8 @@ export default function BuilderSection() {
             
             <p className="text-[#6A6A6A] leading-relaxed font-light tracking-wide text-base">
               Trained at UMass Dartmouth and forged in the exacting environments of New York City high-rises and 
-              Massachusetts state infrastructure, Ziad carries a rare duality: the engineer's unrelenting discipline 
-              and the artisan's devotion to craft.
+              Massachusetts state infrastructure, Ziad carries a rare duality: the engineer&apos;s unrelenting discipline 
+              and the artisan&apos;s devotion to craft.
             </p>
           </div>
           
@@ -145,7 +145,7 @@ export default function BuilderSection() {
           <div className="h-[1px] w-20 md:w-32 bg-gradient-to-l from-transparent to-[#B8935A]/40" />
         </div>
         <p className="text-xl md:text-2xl lg:text-3xl text-[#4A4A4A] font-light tracking-wide leading-relaxed italic">
-          "Build fewer homes. Build them exceptionally. Build them to endure."
+          &ldquo;Build fewer homes. Build them exceptionally. Build them to endure.&rdquo;
         </p>
       </motion.div>
 
