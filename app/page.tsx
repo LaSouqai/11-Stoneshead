@@ -13,6 +13,7 @@ import RenderingDisclosure from "@/components/RenderingDisclosure"
 import MobileStickyCTA from "@/components/MobileStickyCTA"
 import Footer from "@/components/Footer"
 import FloatingPanel from "@/components/FloatingPanel"
+import { COMPLETION_TIMELINE } from "@/lib/site"
 
 const exteriorImages = [
   { src: "/gallery/Exterior_Entrance_south_facing.jpg", desc: "Entrance South Facing" },
@@ -102,8 +103,11 @@ export default function Home() {
           <h2 className="text-4xl md:text-5xl font-raleway font-light tracking-tight text-[#B8935A] mb-6">
             The Residence
           </h2>
-          <p className="text-xl md:text-2xl text-[#B8935A] font-raleway font-light tracking-wide mb-10">
+          <p className="text-xl md:text-2xl text-[#B8935A] font-raleway font-light tracking-wide mb-4">
             A modern architectural estate designed to frame the Las Vegas Strip.
+          </p>
+          <p className="text-sm md:text-base text-gold/80 font-raleway tracking-[0.12em] uppercase mb-10">
+            {COMPLETION_TIMELINE}
           </p>
           <div className="max-w-3xl mx-auto">
             <p className="text-stone/80 text-base md:text-lg leading-relaxed font-raleway font-light tracking-wide mb-12">

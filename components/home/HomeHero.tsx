@@ -5,7 +5,7 @@ import Link from "next/link"
 import { motion, useReducedMotion } from "framer-motion"
 import ScrollCue from "@/components/ScrollCue"
 import HeroVideo from "@/components/HeroVideo"
-import { PROPERTY_STATS } from "@/lib/site"
+import { PROPERTY_STATS, COMPLETION_TIMELINE } from "@/lib/site"
 import { trackHeroCtaClick } from "@/lib/analytics"
 
 type HomeHeroProps = {
@@ -89,7 +89,7 @@ export default function HomeHero({ onPreviewRequest }: HomeHeroProps) {
             {PROPERTY_STATS.sqft} · {PROPERTY_STATS.bedrooms} · {PROPERTY_STATS.baths} · {PROPERTY_STATS.acreage} · {PROPERTY_STATS.levels}
           </p>
           <p className="text-sm md:text-base text-gold/90 font-raleway tracking-[0.12em] uppercase">
-            Final Construction Phase · Private Previews Coming Soon
+            {COMPLETION_TIMELINE}
           </p>
         </div>
 

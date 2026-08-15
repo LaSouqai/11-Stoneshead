@@ -1,5 +1,10 @@
 {
   "git.path": "C:\\Program Files\\Git\\cmd\\git.exe",
   "git.enabled": true,
-  "scm.alwaysShowRepositories": true
+  "git.autorefresh": true,
+  "git.autoRepositoryDetection": true,
+  "git.openRepositoryInParentFolders": "always",
+  "scm.alwaysShowRepositories": true,
+  "scm.showActionButton": true,
+  "workbench.activityBar.location": "default"
 }

@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import Link from "next/link"
+import { COMPLETION_TIMELINE } from "@/lib/site"
 import LuxuryTagline from "@/src/components/ui/LuxuryTagline"
 import LuxuryHeading from "@/src/components/ui/LuxuryHeading"
 import LuxuryParagraph from "@/src/components/ui/LuxuryParagraph"
@@ -56,6 +57,15 @@ export default function ResidenceHero() {
             </Link>
           </motion.div>
           
+          <motion.p
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.25 }}
+            className="text-sm md:text-base text-[#B8935A] mb-6 font-raleway tracking-[0.14em] uppercase"
+          >
+            {COMPLETION_TIMELINE}
+          </motion.p>
+
           <motion.p
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
