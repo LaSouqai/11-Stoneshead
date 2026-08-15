@@ -68,12 +68,73 @@ async function sendAcknowledgmentEmail(resend: Resend, fromEmail: string, data: 
   })
 }
 
-export async function POST(request: Request) {
+async function sendViaFormspree(formId: string, data: ContactPayload) {
+  const response = await fetch(`https://formspree.io/f/${formId}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify({
+      name: data.name,
+      email: data.email,
+      phone: data.phone,
+      message: data.message,
+      page: data.page,
+      referrer: data.referrer,
+      utm: data.utm,
+      _subject: `11 Stoneshead Inquiry from ${data.name}`,
+    }),
+  })
+
+  if (!response.ok) {
+    const result = await response.json().catch(() => ({}))
+    const message =
+      typeof result.error === "string"
+        ? result.error
+        : "We couldn't send your message. Please call (702) 903-0000."
+    throw new Error(message)
+  }
+}
+
+async function sendViaResend(data: ContactPayload) {
   const apiKey = process.env.RESEND_API_KEY
   const toEmail = process.env.CONTACT_TO_EMAIL
   const fromEmail = process.env.CONTACT_FROM_EMAIL
 
   if (!apiKey || !toEmail || !fromEmail) {
+    return false
+  }
+
+  const resend = new Resend(apiKey)
+  const sendResult = await resend.emails.send({
+    from: fromEmail,
+    to: toEmail,
+    replyTo: data.email || undefined,
+    subject: `11 Stoneshead Inquiry from ${data.name}`,
+    text: buildEmailBody(data),
+  })
+
+  if (sendResult.error) {
+    throw new Error("We couldn't send your message. Please call (702) 903-0000.")
+  }
+
+  try {
+    await sendAcknowledgmentEmail(resend, fromEmail, data)
+  } catch {
+    // Lead was delivered; acknowledgment failure should not block success.
+  }
+
+  return true
+}
+
+export async function POST(request: Request) {
+  const resendConfigured = Boolean(
+    process.env.RESEND_API_KEY && process.env.CONTACT_TO_EMAIL && process.env.CONTACT_FROM_EMAIL
+  )
+  const formspreeFormId = process.env.FORMSPREE_FORM_ID || "xbgrarro"
+
+  if (!resendConfigured && !formspreeFormId) {
     return NextResponse.json(
       { error: "Contact delivery is not configured yet. Please call (702) 903-0000." },
       { status: 503 }
@@ -116,28 +177,11 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: validation.error }, { status: 400 })
   }
 
-  const resend = new Resend(apiKey)
-
   try {
-    const sendResult = await resend.emails.send({
-      from: fromEmail,
-      to: toEmail,
-      replyTo: payload.email || undefined,
-      subject: `11 Stoneshead Inquiry from ${payload.name}`,
-      text: buildEmailBody(payload),
-    })
-
-    if (sendResult.error) {
-      return NextResponse.json(
-        { error: "We couldn't send your message. Please call (702) 903-0000." },
-        { status: 502 }
-      )
-    }
-
-    try {
-      await sendAcknowledgmentEmail(resend, fromEmail, payload)
-    } catch {
-      // Lead was delivered; acknowledgment failure should not block success.
+    if (resendConfigured) {
+      await sendViaResend(payload)
+    } else if (formspreeFormId) {
+      await sendViaFormspree(formspreeFormId, payload)
     }
 
     try {
@@ -147,10 +191,12 @@ export async function POST(request: Request) {
     }
 
     return NextResponse.json({ success: true })
-  } catch {
-    return NextResponse.json(
-      { error: "We couldn't send your message. Please call (702) 903-0000." },
-      { status: 502 }
-    )
+  } catch (error) {
+    const message =
+      error instanceof Error
+        ? error.message
+        : "We couldn't send your message. Please call (702) 903-0000."
+
+    return NextResponse.json({ error: message }, { status: 502 })
   }
 }

@@ -10,8 +10,7 @@ export const PROPERTY_STATS = {
   levels: "Two Levels",
 } as const
 
-export const COMPLETION_TIMELINE =
-  "Final Construction Phase · Anticipated for Fall 2026 · Private Previews Available"
+export const COMPLETION_TIMELINE = "Coming Fall of 2026 · Private Previews Available"
 
 export const RENDERING_DISCLOSURE =
   "Architectural renderings are shown for illustrative purposes. Final materials, furnishings, landscaping and features may vary."
