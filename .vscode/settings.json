@@ -4,6 +4,7 @@
   "git.autorefresh": true,
   "git.autoRepositoryDetection": true,
   "git.openRepositoryInParentFolders": "always",
+  "git.useEditorAsCommitInput": false,
   "scm.alwaysShowRepositories": true,
   "scm.showActionButton": true,
   "workbench.activityBar.location": "default"
