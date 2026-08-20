@@ -4,21 +4,23 @@ import RenderingDisclosure from "@/components/RenderingDisclosure"
 export default function Footer() {
   return (
     <footer className="text-center py-12 text-sm text-stone/70 px-6">
-      <div className="flex items-center justify-center gap-5 mb-4">
-        <img src="/logos/ascaya.svg" alt="Ascaya logo" className="h-7 md:h-8 w-auto object-contain opacity-90 brightness-0 invert" />
-        <span className="text-stone/40">•</span>
+      <div className="flex flex-col items-center mb-4">
+        <img src="/logos/ascaya.svg" alt="Ascaya logo" className="h-7 md:h-8 w-auto object-contain opacity-90 brightness-0 invert mb-5" />
         <a
           href="https://www.instagram.com/zariosconstruction"
           target="_blank"
           rel="noreferrer"
           aria-label="Visit Zarios Construction on Instagram"
-          className="inline-flex items-center hover:opacity-90 transition-opacity"
+          className="inline-flex flex-col items-center hover:opacity-90 transition-opacity"
         >
           <img
             src="/logos/zarios.svg"
             alt="Zarios Construction logo"
             className="h-12 md:h-14 w-auto object-contain opacity-95 brightness-0 invert sepia saturate-[3] hue-rotate-[10deg]"
           />
+          <span className="mt-2 text-[10px] md:text-xs text-stone/60 font-raleway font-light tracking-[0.16em] uppercase">
+            Zarios Construction
+          </span>
         </a>
       </div>
 
