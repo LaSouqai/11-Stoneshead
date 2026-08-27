@@ -1,7 +1,7 @@
 import "./globals.css"
 import AnalyticsProvider from "@/components/AnalyticsProvider"
 import { homepageMetadata } from "@/lib/seo"
-import { HERO_VIDEO_ORIGIN } from "@/lib/hero"
+import { HERO_4K_PRELOAD, HERO_VIDEO_ORIGIN } from "@/lib/hero"
 
 export const metadata = {
   ...homepageMetadata,
@@ -20,6 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             No crossOrigin: <video> does not fetch with CORS, and a mismatched
             hint just opens a second connection. */}
         {HERO_VIDEO_ORIGIN && <link rel="preconnect" href={HERO_VIDEO_ORIGIN} />}
+        <link rel="preload" as="video" href={HERO_4K_PRELOAD} media="(min-width: 769px)" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link

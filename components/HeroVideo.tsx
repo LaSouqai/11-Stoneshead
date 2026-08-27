@@ -42,7 +42,7 @@ export default function HeroVideo({ onVideoPlay }: HeroVideoProps) {
           loop
           muted
           playsInline
-          preload="metadata"
+          preload="auto"
           poster={HERO_POSTER}
           onPlay={onVideoPlay}
           // Reveal on the video actually being ready, never on a timer. A fixed

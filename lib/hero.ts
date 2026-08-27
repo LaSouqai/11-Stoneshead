@@ -10,6 +10,9 @@ export const HERO_VIDEO_BASE = RAW_BASE ? RAW_BASE.replace(/\/+$/, "") : null
 
 export const HERO_POSTER = "/video/hero-poster.jpg"
 
+// Bump when the encode changes so browsers and the CDN cannot keep an old file.
+export const HERO_VIDEO_VERSION = "20260827"
+
 /** Origin of the Blob host, for a preconnect hint. Null when serving locally. */
 export const HERO_VIDEO_ORIGIN = (() => {
   if (!HERO_VIDEO_BASE) return null
@@ -20,22 +23,22 @@ export const HERO_VIDEO_ORIGIN = (() => {
   }
 })()
 
-// Largest first. The first tier the display is big enough for wins.
-const TIERS = [
-  { minEffectiveWidth: 769, file: "hero-4k.mp4" },
-  { minEffectiveWidth: 0, file: "hero-mobile.mp4" },
-] as const
+const FILES = ["hero-4k.mp4", "hero-mobile.mp4"] as const
 
-export const HERO_VIDEO_FILES = TIERS.map((t) => t.file)
+export const HERO_VIDEO_FILES = FILES
+
+export function heroAssetUrl(file: string): string {
+  const query = `?v=${HERO_VIDEO_VERSION}`
+  return HERO_VIDEO_BASE ? `${HERO_VIDEO_BASE}/${file}${query}` : `/video/${file}${query}`
+}
+
+/** Desktop preload target. Phones should not fetch this. */
+export const HERO_4K_PRELOAD = heroAssetUrl("hero-4k.mp4")
 
 /**
  * Desktop uses the 4K hero. Phones keep the smaller mobile file.
  */
 export function heroVideoUrl(): string {
-  // Genuine phones take the small file. Everything else uses the 4K hero.
   const isPhone = window.matchMedia("(max-width: 768px)").matches
-  const effective = isPhone ? 0 : 769
-
-  const tier = TIERS.find((t) => effective >= t.minEffectiveWidth) ?? TIERS[TIERS.length - 1]
-  return HERO_VIDEO_BASE ? `${HERO_VIDEO_BASE}/${tier.file}` : `/video/${tier.file}`
+  return heroAssetUrl(isPhone ? "hero-mobile.mp4" : "hero-4k.mp4")
 }
