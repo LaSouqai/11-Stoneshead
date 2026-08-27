@@ -1,17 +1,10 @@
 // Hero video sources.
 //
-// Two modes, and the site works in either without a code change:
-//
-//   Default (nothing configured) - serves the 1440p/810p pair committed under
-//   public/video, ~30MB total. These are the same encodes as the Blob tiers of
-//   the same resolution, not cheaper ones: a 3.1 Mbps 1440p version was tried
-//   first and visibly smeared the house at 1:1. Drone footage pans constantly,
-//   so every pixel changes every frame and low bitrates fall apart.
-//
-//   NEXT_PUBLIC_HERO_VIDEO_BASE set - serves higher-quality tiers from Vercel
-//   Blob instead, including a native 4K master that is far too large to keep in
-//   git. Upload with scripts/upload-hero-to-blob.mjs, then set the variable to
-//   the base URL it prints. It is read at BUILD time, so redeploy after setting it.
+// All three tiers are committed under public/video, so the site works with
+// nothing configured. Setting NEXT_PUBLIC_HERO_VIDEO_BASE serves the identical
+// filenames from Vercel Blob instead, which keeps the ~75MB out of the git
+// checkout Vercel clones on every build. Upload with
+// scripts/upload-hero-to-blob.mjs. The variable is read at BUILD time.
 
 const RAW_BASE = process.env.NEXT_PUBLIC_HERO_VIDEO_BASE
 export const HERO_VIDEO_BASE = RAW_BASE ? RAW_BASE.replace(/\/+$/, "") : null
@@ -28,31 +21,34 @@ export const HERO_VIDEO_ORIGIN = (() => {
   }
 })()
 
-// Smallest first; the first tier the device fits inside wins.
-const BLOB_TIERS = [
-  { maxEffectiveWidth: 1280, file: "hero-mobile.mp4" },  // 1440x810,  5.3MB
-  { maxEffectiveWidth: 2600, file: "hero-desktop.mp4" }, // 2560x1440, 25MB
-  { maxEffectiveWidth: Infinity, file: "hero-4k.mp4" },  // 3840x2160, 44MB
+// Largest first. The first tier the display is big enough for wins.
+const TIERS = [
+  { minEffectiveWidth: 2800, file: "hero-4k.mp4" },      // 3840x2160, 44MB
+  { minEffectiveWidth: 1200, file: "hero-desktop.mp4" }, // 2560x1440, 25MB
+  { minEffectiveWidth: 0, file: "hero-mobile.mp4" },     // 1440x810,   5.3MB
 ] as const
 
-const LOCAL_TIERS = [
-  { maxEffectiveWidth: 1280, file: "/video/hero-mobile.mp4" },  // 1440x810,  5.3MB
-  { maxEffectiveWidth: Infinity, file: "/video/hero-desktop.mp4" }, // 2560x1440, 25MB
-] as const
-
-export const HERO_BLOB_FILES = BLOB_TIERS.map((t) => t.file)
+export const HERO_VIDEO_FILES = TIERS.map((t) => t.file)
 
 /**
- * Device pixel ratio is deliberately capped at 1.5 rather than used raw. This is
- * a dimmed background behind text, not detail work, and an uncapped 2x would hand
- * the largest file to every high-DPI laptop. Raise the cap to push bigger tiers
- * to more people.
+ * Picks a tier from the SCREEN, not the browser window.
+ *
+ * Keying off window.innerWidth was a bug: a half-width window on an ordinary
+ * desktop fell through to the phone file. Screen size is also stable across
+ * resizes, so the source never has to change mid-view.
+ *
+ * Device pixel ratio is capped at 1.5 rather than used raw - this is a dimmed
+ * background behind text, not detail work, and uncapped 2x would send the 44MB
+ * file to laptops that gain nothing from it.
  */
-export function heroVideoUrl(cssWidth: number, devicePixelRatio: number): string {
-  const effective = cssWidth * Math.min(devicePixelRatio || 1, 1.5)
-  const pick = <T extends { maxEffectiveWidth: number }>(tiers: readonly T[]) =>
-    tiers.find((t) => effective <= t.maxEffectiveWidth) ?? tiers[tiers.length - 1]
+export function heroVideoUrl(): string {
+  const screenWidth = typeof window.screen?.width === "number" ? window.screen.width : window.innerWidth
+  const dpr = Math.min(window.devicePixelRatio || 1, 1.5)
 
-  if (!HERO_VIDEO_BASE) return pick(LOCAL_TIERS).file
-  return `${HERO_VIDEO_BASE}/${pick(BLOB_TIERS).file}`
+  // Genuine phones take the small file whatever the arithmetic says.
+  const isPhone = window.matchMedia("(max-width: 768px)").matches
+  const effective = isPhone ? 0 : screenWidth * dpr
+
+  const tier = TIERS.find((t) => effective >= t.minEffectiveWidth) ?? TIERS[TIERS.length - 1]
+  return HERO_VIDEO_BASE ? `${HERO_VIDEO_BASE}/${tier.file}` : `/video/${tier.file}`
 }

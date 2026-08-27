@@ -24,7 +24,7 @@ export default function HeroVideo({ onVideoPlay }: HeroVideoProps) {
     }
 
     // Resolve the tier here rather than with <source media>, which Chrome ignores.
-    setSrc(heroVideoUrl(window.innerWidth, window.devicePixelRatio))
+    setSrc(heroVideoUrl())
 
     const timer = setTimeout(() => setShowVideo(true), 1500)
     return () => clearTimeout(timer)
