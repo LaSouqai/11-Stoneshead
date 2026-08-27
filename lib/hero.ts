@@ -1,20 +1,21 @@
-// The hero video is served from Vercel Blob, not from this repo. The 4K master
-// is 44MB and git is the wrong place for it: every re-encode would be stored
-// forever and Vercel would clone it on every build.
+// Hero video sources.
 //
-// Set NEXT_PUBLIC_HERO_VIDEO_BASE to the Blob directory that
-// scripts/upload-hero-to-blob.mjs prints, e.g.
-//   https://<store>.public.blob.vercel-storage.com/hero
+// Two modes, and the site works in either without a code change:
 //
-// With it unset the hero falls back to the poster image, which IS committed.
-// That degrades quietly rather than breaking, so check the console in dev.
+//   Default (nothing configured) - serves the 1440p/810p pair committed under
+//   public/video. Fine quality, ~15MB total, ships with the repo.
+//
+//   NEXT_PUBLIC_HERO_VIDEO_BASE set - serves higher-quality tiers from Vercel
+//   Blob instead, including a native 4K master that is far too large to keep in
+//   git. Upload with scripts/upload-hero-to-blob.mjs, then set the variable to
+//   the base URL it prints. It is read at BUILD time, so redeploy after setting it.
 
 const RAW_BASE = process.env.NEXT_PUBLIC_HERO_VIDEO_BASE
 export const HERO_VIDEO_BASE = RAW_BASE ? RAW_BASE.replace(/\/+$/, "") : null
 
 export const HERO_POSTER = "/video/hero-poster.jpg"
 
-/** Origin of the Blob host, for a preconnect hint. Null if the base is unset or malformed. */
+/** Origin of the Blob host, for a preconnect hint. Null when serving locally. */
 export const HERO_VIDEO_ORIGIN = (() => {
   if (!HERO_VIDEO_BASE) return null
   try {
@@ -24,24 +25,31 @@ export const HERO_VIDEO_ORIGIN = (() => {
   }
 })()
 
-// Smallest first. The first tier the device fits inside wins.
-const TIERS = [
+// Smallest first; the first tier the device fits inside wins.
+const BLOB_TIERS = [
   { maxEffectiveWidth: 1280, file: "hero-mobile.mp4" },  // 1440x810,  5.3MB
   { maxEffectiveWidth: 2600, file: "hero-desktop.mp4" }, // 2560x1440, 25MB
   { maxEffectiveWidth: Infinity, file: "hero-4k.mp4" },  // 3840x2160, 44MB
 ] as const
 
-export const HERO_VIDEO_FILES = TIERS.map((t) => t.file)
+const LOCAL_TIERS = [
+  { maxEffectiveWidth: 1280, file: "/video/hero-mobile.mp4" },  // 1440x810,  3.1MB
+  { maxEffectiveWidth: Infinity, file: "/video/hero-desktop.mp4" }, // 2560x1440, 12MB
+] as const
+
+export const HERO_BLOB_FILES = BLOB_TIERS.map((t) => t.file)
 
 /**
  * Device pixel ratio is deliberately capped at 1.5 rather than used raw. This is
- * a dimmed background behind text, not detail work, and an uncapped 2x would
- * hand the 44MB file to every high-DPI laptop. At 1.5x, 4K goes only to genuinely
- * large displays. Raise the cap if the 4K tier should reach more people.
+ * a dimmed background behind text, not detail work, and an uncapped 2x would hand
+ * the largest file to every high-DPI laptop. Raise the cap to push bigger tiers
+ * to more people.
  */
-export function heroVideoUrl(cssWidth: number, devicePixelRatio: number): string | null {
-  if (!HERO_VIDEO_BASE) return null
+export function heroVideoUrl(cssWidth: number, devicePixelRatio: number): string {
   const effective = cssWidth * Math.min(devicePixelRatio || 1, 1.5)
-  const tier = TIERS.find((t) => effective <= t.maxEffectiveWidth) ?? TIERS[TIERS.length - 1]
-  return `${HERO_VIDEO_BASE}/${tier.file}`
+  const pick = <T extends { maxEffectiveWidth: number }>(tiers: readonly T[]) =>
+    tiers.find((t) => effective <= t.maxEffectiveWidth) ?? tiers[tiers.length - 1]
+
+  if (!HERO_VIDEO_BASE) return pick(LOCAL_TIERS).file
+  return `${HERO_VIDEO_BASE}/${pick(BLOB_TIERS).file}`
 }

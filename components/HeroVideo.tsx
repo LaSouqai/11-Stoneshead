@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion"
-import { HERO_POSTER, HERO_VIDEO_BASE, heroVideoUrl } from "@/lib/hero"
+import { HERO_POSTER, heroVideoUrl } from "@/lib/hero"
 
 type HeroVideoProps = {
   onVideoPlay?: () => void
@@ -20,16 +20,6 @@ export default function HeroVideo({ onVideoPlay }: HeroVideoProps) {
 
     const connection = (navigator as Navigator & { connection?: { saveData?: boolean; effectiveType?: string } }).connection
     if (connection?.saveData || connection?.effectiveType === "2g" || connection?.effectiveType === "slow-2g") {
-      return
-    }
-
-    if (!HERO_VIDEO_BASE) {
-      if (process.env.NODE_ENV !== "production") {
-        console.warn(
-          "[hero] NEXT_PUBLIC_HERO_VIDEO_BASE is not set, so the hero is showing the poster only. " +
-            "Upload the videos with scripts/upload-hero-to-blob.mjs and set the variable."
-        )
-      }
       return
     }
 
@@ -65,8 +55,8 @@ export default function HeroVideo({ onVideoPlay }: HeroVideoProps) {
         />
       )}
 
-      {/* Carries the hero until the video is decoded, and stays for
-          reduced-motion, save-data, and unconfigured-Blob visitors. */}
+      {/* Carries the hero until the video is decoded, and stays put for
+          reduced-motion and save-data visitors. */}
       <img
         src={HERO_POSTER}
         alt="11 Stoneshead at twilight, above the lit Las Vegas Strip"
