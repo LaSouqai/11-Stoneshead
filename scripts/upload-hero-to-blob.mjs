@@ -5,8 +5,9 @@
  *   BLOB_READ_WRITE_TOKEN=vercel_blob_rw_... node scripts/upload-hero-to-blob.mjs _not-deployed/hero-blob
  *
  * Get the token from the Vercel dashboard: Storage -> your Blob store -> Tokens.
- * Re-running overwrites the same paths, so the URLs stay stable across re-encodes
- * and you do not have to change the environment variable again.
+ * @vercel/blob 0.27.x overwrites an existing pathname by default, so re-running
+ * reuses the same URLs and you never have to change the environment variable.
+ * (Newer majors require an explicit allowOverwrite flag - add it if you upgrade.)
  */
 import { readFile, stat } from "node:fs/promises"
 import { join } from "node:path"
@@ -34,7 +35,6 @@ for (const name of FILES) {
     contentType: "video/mp4",
     cacheControlMaxAge: 31536000,    // a year; the filenames are stable
     multipart: true,                 // the 4K tier is well past a single request
-    allowOverwrite: true,
   })
   console.log("done")
   urls.push(url)
