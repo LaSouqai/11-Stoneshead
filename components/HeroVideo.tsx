@@ -58,7 +58,7 @@ export default function HeroVideo({ onVideoPlay }: HeroVideoProps) {
           onPlay={onVideoPlay}
           className="absolute inset-0 w-full h-full object-cover"
           initial={{ opacity: 0 }}
-          animate={showVideo ? { opacity: 0.8 } : { opacity: 0 }}
+          animate={showVideo ? { opacity: 1 } : { opacity: 0 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
         />
       ) : null}
@@ -69,8 +69,8 @@ export default function HeroVideo({ onVideoPlay }: HeroVideoProps) {
         src="/video/hero-poster.jpg"
         alt="11 Stoneshead exterior overlooking the Las Vegas Strip"
         aria-hidden={canPlayVideo && src ? true : undefined}
-        className={`absolute inset-0 w-full h-full object-cover opacity-80 transition-opacity duration-700 ${
-          canPlayVideo && src && showVideo ? "opacity-0" : "opacity-80"
+        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
+          canPlayVideo && src && showVideo ? "opacity-0" : "opacity-100"
         }`}
       />
     </motion.div>
