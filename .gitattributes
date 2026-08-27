@@ -1,0 +1,14 @@
+# Normalise line endings so the repo stops showing whole-file phantom diffs.
+* text=auto eol=lf
+
+# Never touch binaries.
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.ico  binary
+*.pdf  binary
+*.mp4  binary
+*.webm binary
+*.woff  binary
+*.woff2 binary

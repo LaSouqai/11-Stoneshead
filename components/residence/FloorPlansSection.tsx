@@ -78,8 +78,9 @@ export default function FloorPlansSection() {
               alt={plans[activeLevel].title}
               className="w-full h-auto object-contain"
               onError={(e) => {
-                // Fallback: if image doesn't exist, show a placeholder
-                e.currentTarget.src = "/placeholder-floorplan.jpg"
+                // Plan images ship in /public. If one ever goes missing, hide the
+                // frame rather than swapping in a placeholder that 404s as well.
+                e.currentTarget.style.display = "none"
               }}
             />
             {/* Overlay with Click to Enlarge hint */}

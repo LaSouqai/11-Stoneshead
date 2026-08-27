@@ -18,21 +18,21 @@ export default function DownloadsSection() {
     {
       title: "Floor Plans",
       description: "Dimensioned plans for Level 1 and Level 2",
-      fileSize: "2.4 MB",
+      fileSize: "2.2 MB",
       fileType: "PDF",
       href: "/pdf/1and2floor plan.pdf"
     },
     {
       title: "Material Board",
       description: "Comprehensive material selections and finishes",
-      fileSize: "5.1 MB",
+      fileSize: "232 KB",
       fileType: "PDF",
       href: "/pdf/material board.pdf"
     },
     {
       title: "Specifications Sheet",
       description: "Detailed technical specifications and systems",
-      fileSize: "1.8 MB",
+      fileSize: "249 KB",
       fileType: "PDF",
       href: "/pdf/Spec Sheet.pdf"
     }

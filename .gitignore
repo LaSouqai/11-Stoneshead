@@ -33,3 +33,6 @@ pnpm-debug.log*
 *.tsbuildinfo
 next-env.d.ts
 
+
+# local-only working files, parked out of the deployment
+/_not-deployed/
