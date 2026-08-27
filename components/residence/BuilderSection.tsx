@@ -85,7 +85,7 @@ export default function BuilderSection() {
             <p className="text-[#6A6A6A] font-light tracking-wide uppercase text-xs md:text-sm">Commercial Grade Quality</p>
           </div>
           <div className="text-center">
-            <h4 className="text-4xl md:text-5xl lg:text-6xl font-light text-[#B8935A] mb-3">9,747</h4>
+            <h4 className="text-4xl md:text-5xl lg:text-6xl font-light text-[#B8935A] mb-3">9,748</h4>
             <p className="text-[#6A6A6A] font-light tracking-wide uppercase text-xs md:text-sm">Square Feet of Excellence</p>
           </div>
         </motion.div>

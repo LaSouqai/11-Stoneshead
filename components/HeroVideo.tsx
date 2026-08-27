@@ -25,9 +25,6 @@ export default function HeroVideo({ onVideoPlay }: HeroVideoProps) {
 
     // Resolve the tier here rather than with <source media>, which Chrome ignores.
     setSrc(heroVideoUrl())
-
-    const timer = setTimeout(() => setShowVideo(true), 1500)
-    return () => clearTimeout(timer)
   }, [prefersReducedMotion])
 
   const videoActive = Boolean(src)
@@ -48,6 +45,12 @@ export default function HeroVideo({ onVideoPlay }: HeroVideoProps) {
           preload="metadata"
           poster={HERO_POSTER}
           onPlay={onVideoPlay}
+          // Reveal on the video actually being ready, never on a timer. A fixed
+          // delay hands the hero over even when the file 404s, stalls on a slow
+          // connection, or uses an unsupported codec; gating on these events means
+          // a failure just leaves the poster up, which is the correct fallback.
+          onCanPlay={() => setShowVideo(true)}
+          onPlaying={() => setShowVideo(true)}
           className="absolute inset-0 w-full h-full object-cover"
           initial={{ opacity: 0 }}
           animate={showVideo ? { opacity: 1 } : { opacity: 0 }}

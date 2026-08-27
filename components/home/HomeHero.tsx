@@ -88,10 +88,22 @@ export default function HomeHero({ onPreviewRequest }: HomeHeroProps) {
         </div>
 
         <div className="mt-10 w-full max-w-3xl space-y-4">
-          <p className="text-sm md:text-base text-stone/90 font-raleway tracking-wide">
+          <p
+            className="text-sm md:text-base text-stone/90 font-raleway tracking-wide"
+            style={{
+              textShadow:
+                "0 0 30px rgba(0,0,0,0.9), 0 0 15px rgba(0,0,0,0.8), 0 2px 8px rgba(0,0,0,0.7)",
+            }}
+          >
             {PROPERTY_STATS.sqft} · {PROPERTY_STATS.bedrooms} · {PROPERTY_STATS.baths} · {PROPERTY_STATS.acreage} · {PROPERTY_STATS.levels}
           </p>
-          <p className="text-sm md:text-base text-gold/90 font-raleway tracking-[0.12em] uppercase">
+          <p
+            className="text-sm md:text-base text-gold/90 font-raleway tracking-[0.12em] uppercase"
+            style={{
+              textShadow:
+                "0 0 30px rgba(0,0,0,0.9), 0 0 15px rgba(0,0,0,0.8), 0 2px 8px rgba(0,0,0,0.7)",
+            }}
+          >
             {COMPLETION_TIMELINE}
           </p>
         </div>

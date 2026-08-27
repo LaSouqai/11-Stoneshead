@@ -31,7 +31,7 @@ export default function FloorPlansSection() {
       <SectionHeader
         tagline="Spatial Design"
         title="Floor Plans"
-        subtitle="9,747 square feet across two thoughtfully designed levels."
+        subtitle="9,748 square feet across two thoughtfully designed levels."
       />
 
       {/* Level Selector */}

@@ -94,7 +94,7 @@ export default function ResidenceNav() {
                   key={section.id}
                   type="button"
                   onClick={() => scrollToSection(section.id)}
-                  className={`text-xs tracking-[0.15em] uppercase transition-all duration-300 focus:outline-none focus:underline ${
+                  className={`whitespace-nowrap text-xs tracking-[0.15em] uppercase transition-all duration-300 focus:outline-none focus:underline ${
                     activeSection === section.id
                       ? "text-[#1B1B1B] font-normal"
                       : "text-[#6A6A6A] hover:text-[#1B1B1B] font-light"
