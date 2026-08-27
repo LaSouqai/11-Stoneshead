@@ -2,75 +2,77 @@
 
 import { useEffect, useState } from "react"
 import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion"
+import { HERO_POSTER, HERO_VIDEO_BASE, heroVideoUrl } from "@/lib/hero"
 
 type HeroVideoProps = {
   onVideoPlay?: () => void
 }
 
-const DESKTOP_SRC = "/video/hero-desktop.mp4"
-const MOBILE_SRC = "/video/hero-mobile.mp4"
-const MOBILE_QUERY = "(max-width: 768px)"
-
 export default function HeroVideo({ onVideoPlay }: HeroVideoProps) {
   const prefersReducedMotion = useReducedMotion()
   const [showVideo, setShowVideo] = useState(false)
-  const [canPlayVideo, setCanPlayVideo] = useState(true)
   const [src, setSrc] = useState<string | null>(null)
   const { scrollY } = useScroll()
   const parallaxY = useTransform(scrollY, [0, 500], [0, prefersReducedMotion ? 0 : 75])
 
   useEffect(() => {
-    if (prefersReducedMotion) {
-      setCanPlayVideo(false)
-      return
-    }
+    if (prefersReducedMotion) return
 
     const connection = (navigator as Navigator & { connection?: { saveData?: boolean; effectiveType?: string } }).connection
     if (connection?.saveData || connection?.effectiveType === "2g" || connection?.effectiveType === "slow-2g") {
-      setCanPlayVideo(false)
       return
     }
 
-    // Chrome dropped support for the `media` attribute on <source>, so the
-    // browser would simply take the first playable file regardless of device.
-    // Resolve the right file here instead.
-    setSrc(window.matchMedia(MOBILE_QUERY).matches ? MOBILE_SRC : DESKTOP_SRC)
+    if (!HERO_VIDEO_BASE) {
+      if (process.env.NODE_ENV !== "production") {
+        console.warn(
+          "[hero] NEXT_PUBLIC_HERO_VIDEO_BASE is not set, so the hero is showing the poster only. " +
+            "Upload the videos with scripts/upload-hero-to-blob.mjs and set the variable."
+        )
+      }
+      return
+    }
+
+    // Resolve the tier here rather than with <source media>, which Chrome ignores.
+    setSrc(heroVideoUrl(window.innerWidth, window.devicePixelRatio))
 
     const timer = setTimeout(() => setShowVideo(true), 1500)
     return () => clearTimeout(timer)
   }, [prefersReducedMotion])
+
+  const videoActive = Boolean(src)
 
   return (
     <motion.div
       className="absolute inset-0 w-full h-[100vh] overflow-hidden"
       style={{ translateY: parallaxY }}
     >
-      {canPlayVideo && src ? (
+      {videoActive && (
         <motion.video
           key={src}
-          src={src}
+          src={src ?? undefined}
           autoPlay
           loop
           muted
           playsInline
           preload="metadata"
-          poster="/video/hero-poster.jpg"
+          poster={HERO_POSTER}
           onPlay={onVideoPlay}
           className="absolute inset-0 w-full h-full object-cover"
           initial={{ opacity: 0 }}
           animate={showVideo ? { opacity: 1 } : { opacity: 0 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
         />
-      ) : null}
+      )}
 
-      {/* Poster carries the hero until the video is decoded, and stays put
-          for reduced-motion and save-data visitors. */}
+      {/* Carries the hero until the video is decoded, and stays for
+          reduced-motion, save-data, and unconfigured-Blob visitors. */}
       <img
-        src="/video/hero-poster.jpg"
-        alt="11 Stoneshead exterior overlooking the Las Vegas Strip"
-        aria-hidden={canPlayVideo && src ? true : undefined}
+        src={HERO_POSTER}
+        alt="11 Stoneshead at twilight, above the lit Las Vegas Strip"
+        aria-hidden={videoActive || undefined}
         className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
-          canPlayVideo && src && showVideo ? "opacity-0" : "opacity-100"
+          videoActive && showVideo ? "opacity-0" : "opacity-100"
         }`}
       />
     </motion.div>

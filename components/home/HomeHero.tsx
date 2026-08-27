@@ -38,7 +38,10 @@ export default function HomeHero({ onPreviewRequest }: HomeHeroProps) {
     <section className="relative h-[100svh] flex items-center justify-center overflow-hidden">
       <HeroVideo />
 
-      <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-black/15 to-transparent" />
+      {/* Kept light on purpose: this sits over twilight footage, and white type
+          already has plenty of contrast against that sky. A heavier scrim only
+          costs brightness in the city lights, which are the point of the shot. */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/15 via-black/5 to-transparent" />
 
       <motion.div
         initial={false}
