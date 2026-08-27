@@ -3,7 +3,10 @@
 // Two modes, and the site works in either without a code change:
 //
 //   Default (nothing configured) - serves the 1440p/810p pair committed under
-//   public/video. Fine quality, ~15MB total, ships with the repo.
+//   public/video, ~30MB total. These are the same encodes as the Blob tiers of
+//   the same resolution, not cheaper ones: a 3.1 Mbps 1440p version was tried
+//   first and visibly smeared the house at 1:1. Drone footage pans constantly,
+//   so every pixel changes every frame and low bitrates fall apart.
 //
 //   NEXT_PUBLIC_HERO_VIDEO_BASE set - serves higher-quality tiers from Vercel
 //   Blob instead, including a native 4K master that is far too large to keep in
@@ -33,8 +36,8 @@ const BLOB_TIERS = [
 ] as const
 
 const LOCAL_TIERS = [
-  { maxEffectiveWidth: 1280, file: "/video/hero-mobile.mp4" },  // 1440x810,  3.1MB
-  { maxEffectiveWidth: Infinity, file: "/video/hero-desktop.mp4" }, // 2560x1440, 12MB
+  { maxEffectiveWidth: 1280, file: "/video/hero-mobile.mp4" },  // 1440x810,  5.3MB
+  { maxEffectiveWidth: Infinity, file: "/video/hero-desktop.mp4" }, // 2560x1440, 25MB
 ] as const
 
 export const HERO_BLOB_FILES = BLOB_TIERS.map((t) => t.file)
