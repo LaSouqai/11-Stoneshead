@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion"
+import { useReducedMotion } from "framer-motion"
 import { HERO_POSTER, heroVideoUrl } from "@/lib/hero"
 
 type HeroVideoProps = {
@@ -12,8 +12,7 @@ export default function HeroVideo({ onVideoPlay }: HeroVideoProps) {
   const prefersReducedMotion = useReducedMotion()
   const [showVideo, setShowVideo] = useState(false)
   const [src, setSrc] = useState<string | null>(null)
-  const { scrollY } = useScroll()
-  const parallaxY = useTransform(scrollY, [0, 500], [0, prefersReducedMotion ? 0 : 75])
+  const [isPhone, setIsPhone] = useState(false)
 
   useEffect(() => {
     if (prefersReducedMotion) return
@@ -24,20 +23,21 @@ export default function HeroVideo({ onVideoPlay }: HeroVideoProps) {
     }
 
     // Resolve the tier here rather than with <source media>, which Chrome ignores.
+    const phone = window.matchMedia("(max-width: 768px)").matches
+    setIsPhone(phone)
     setSrc(heroVideoUrl())
   }, [prefersReducedMotion])
 
   const videoActive = Boolean(src)
 
   return (
-    <motion.div
-      className="absolute inset-0 w-full h-[100vh] overflow-hidden"
-      style={{ translateY: parallaxY }}
-    >
+    <div className="absolute inset-0 overflow-hidden">
       {videoActive && (
-        <motion.video
+        <video
           key={src}
           src={src ?? undefined}
+          width={isPhone ? 1440 : 3840}
+          height={isPhone ? 810 : 2160}
           autoPlay
           loop
           muted
@@ -51,10 +51,9 @@ export default function HeroVideo({ onVideoPlay }: HeroVideoProps) {
           // a failure just leaves the poster up, which is the correct fallback.
           onCanPlay={() => setShowVideo(true)}
           onPlaying={() => setShowVideo(true)}
-          className="absolute inset-0 w-full h-full object-cover"
-          initial={{ opacity: 0 }}
-          animate={showVideo ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
+          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
+            showVideo ? "opacity-100" : "opacity-0"
+          }`}
         />
       )}
 
@@ -64,10 +63,10 @@ export default function HeroVideo({ onVideoPlay }: HeroVideoProps) {
         src={HERO_POSTER}
         alt="11 Stoneshead at twilight, above the lit Las Vegas Strip"
         aria-hidden={videoActive || undefined}
-        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
+        className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
           videoActive && showVideo ? "opacity-0" : "opacity-100"
         }`}
       />
-    </motion.div>
+    </div>
   )
 }
