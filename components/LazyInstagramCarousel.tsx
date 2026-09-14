@@ -1,55 +1,33 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import Image from "next/image"
+import { INSTAGRAM_POSTS } from "@/lib/instagram"
 import { trackInstagramClick } from "@/lib/analytics"
 
 export default function LazyInstagramCarousel() {
-  const [visible, setVisible] = useState(false)
-  const containerRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    if (!containerRef.current) return
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries.some((entry) => entry.isIntersecting)) {
-          setVisible(true)
-          observer.disconnect()
-        }
-      },
-      { rootMargin: "200px" }
-    )
-
-    observer.observe(containerRef.current)
-    return () => observer.disconnect()
-  }, [])
-
-  useEffect(() => {
-    if (!visible) return
-
-    const existing = document.querySelector('script[data-elfsight="true"]')
-    if (existing) return
-
-    const script = document.createElement("script")
-    script.src = "https://elfsightcdn.com/platform.js"
-    script.async = true
-    script.dataset.elfsight = "true"
-    document.body.appendChild(script)
-  }, [visible])
-
   return (
-    <div ref={containerRef} className="w-full max-w-6xl mx-auto">
-      {visible ? (
-        <div
-          className="elfsight-app-d17121da-0627-4319-884c-7ee833088669"
-          data-elfsight-app-lazy
-          onClick={() => trackInstagramClick()}
-        />
-      ) : (
-        <div className="h-40 flex items-center justify-center text-stone/60 text-sm">
-          Loading Instagram feed…
-        </div>
-      )}
+    <div className="w-full max-w-6xl mx-auto">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-3">
+        {INSTAGRAM_POSTS.map((post) => (
+          <a
+            key={post.href}
+            href={post.href}
+            target="_blank"
+            rel="noreferrer"
+            aria-label={post.alt}
+            onClick={() => trackInstagramClick()}
+            className="group relative aspect-square overflow-hidden rounded-xl border border-[#B8935A]/20 focus:outline-none focus:ring-2 focus:ring-gold/50"
+          >
+            <Image
+              src={post.image}
+              alt={post.alt}
+              fill
+              sizes="(max-width: 768px) 50vw, 33vw"
+              className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+            />
+          </a>
+        ))}
+      </div>
     </div>
   )
 }

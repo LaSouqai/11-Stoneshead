@@ -17,3 +17,5 @@ export const RENDERING_DISCLOSURE =
 
 export const CONTACT_PHONE = "(702) 903-0000"
 export const CONTACT_PHONE_HREF = "tel:+17029030000"
+
+export { INSTAGRAM_HANDLE, INSTAGRAM_LATEST_POST_URL, INSTAGRAM_URL } from "@/lib/instagram"

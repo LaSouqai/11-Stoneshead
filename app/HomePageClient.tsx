@@ -14,7 +14,7 @@ import RenderingDisclosure from "@/components/RenderingDisclosure"
 import MobileStickyCTA from "@/components/MobileStickyCTA"
 import Footer from "@/components/Footer"
 import FloatingPanel from "@/components/FloatingPanel"
-import { COMPLETION_TIMELINE } from "@/lib/site"
+import { COMPLETION_TIMELINE, INSTAGRAM_HANDLE, INSTAGRAM_URL } from "@/lib/site"
 
 const exteriorImages = [
   { src: "/gallery/Exterior_Entrance_south_facing.jpg", desc: "Entrance South Facing" },
@@ -322,7 +322,17 @@ export default function HomePageClient() {
 
       <section id="instagram" className="section">
         <h2 className="text-3xl mb-12 text-gold font-cormorant text-center">Instagram</h2>
-        <p className="text-center text-stone/80 mb-8 max-w-2xl mx-auto">Follow the Build</p>
+        <p className="text-center text-stone/80 mb-8 max-w-2xl mx-auto">
+          Follow the Build{" "}
+          <a
+            href={INSTAGRAM_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="text-gold hover:text-gold/80 transition-colors"
+          >
+            @{INSTAGRAM_HANDLE}
+          </a>
+        </p>
         <LazyInstagramCarousel />
       </section>
 

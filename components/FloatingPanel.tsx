@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { Camera, Instagram, Mail, Phone, Box, Calendar } from "lucide-react"
-import { CONTACT_PHONE_HREF } from "@/lib/site"
+import { CONTACT_PHONE_HREF, INSTAGRAM_LATEST_POST_URL } from "@/lib/site"
 import { trackInstagramClick, trackPhoneClick } from "@/lib/analytics"
 
 export default function FloatingPanel() {
@@ -85,7 +85,11 @@ export default function FloatingPanel() {
             type="button"
             aria-label={item.label}
             onClick={() => {
-              if (item.id === "instagram") trackInstagramClick()
+              if (item.id === "instagram") {
+                trackInstagramClick()
+                window.open(INSTAGRAM_LATEST_POST_URL, "_blank", "noopener,noreferrer")
+                return
+              }
               scrollTo(item.id)
             }}
             className="
@@ -292,7 +296,11 @@ export default function FloatingPanel() {
             type="button"
             aria-label={item.id === "gallery" ? "Gallery" : item.id === "instagram" ? "Instagram" : "3D Tour"}
             onClick={() => {
-              if (item.id === "instagram") trackInstagramClick()
+              if (item.id === "instagram") {
+                trackInstagramClick()
+                window.open(INSTAGRAM_LATEST_POST_URL, "_blank", "noopener,noreferrer")
+                return
+              }
               scrollTo(item.id)
             }}
             className="
