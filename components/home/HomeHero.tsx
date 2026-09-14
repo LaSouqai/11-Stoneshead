@@ -49,14 +49,17 @@ export default function HomeHero({ onPreviewRequest }: HomeHeroProps) {
   // bottom. So the copy is split into those two bands rather than stacked in
   // one centred block, which used to sit straight over the subject.
   const titleCard = !prefersReducedMotion && showSanctuary
+  const goldOnPhoto = {
+    textShadow:
+      "0 1px 0 rgba(0,0,0,1), 0 2px 2px rgba(0,0,0,0.95), 0 0 12px rgba(0,0,0,0.95), 0 4px 18px rgba(0,0,0,0.85)",
+  }
 
   return (
     <section className="relative h-[100svh] overflow-hidden">
       <HeroVideo />
 
-      {/* Kept light on purpose: this sits over twilight footage, and white type
-          already has plenty of contrast against that sky. A heavier scrim only
-          costs brightness in the city lights, which are the point of the shot. */}
+      {/* Kept light so the twilight city stays bright. Contrast for type is
+          handled on the letters themselves, not with a dark wash. */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/15 via-black/5 to-transparent" />
 
       {/* Sky band — the title card hands off to the address in place, so
@@ -67,13 +70,14 @@ export default function HomeHero({ onPreviewRequest }: HomeHeroProps) {
             motion reduced it is permanent, so it stacks in flow at a size that
             still leaves the Strip and the house uncovered. */}
         <h1
-          className={`font-raleway tracking-[0.15em] font-light uppercase text-white text-shadow-sm text-center ${
+          className={`font-raleway tracking-[0.15em] font-light uppercase text-white text-center ${
             prefersReducedMotion
               ? "relative mb-6 text-2xl md:text-4xl opacity-100"
               : `absolute inset-x-6 top-[7vh] text-4xl sm:text-5xl md:text-7xl transition-opacity duration-1000 ${
                   titleCard ? "opacity-100" : "opacity-0"
                 }`
           }`}
+          style={goldOnPhoto}
         >
           A Sanctuary Above the Strip
         </h1>
@@ -85,11 +89,8 @@ export default function HomeHero({ onPreviewRequest }: HomeHeroProps) {
           className="flex flex-col items-center w-full max-w-5xl"
         >
           <div
-            className="text-base md:text-lg text-[#B8935A] font-raleway font-light tracking-[0.15em] uppercase flex flex-wrap justify-center gap-2 w-full"
-            style={{
-              textShadow:
-                "0 0 30px rgba(0,0,0,0.9), 0 0 15px rgba(0,0,0,0.8), 0 2px 8px rgba(0,0,0,0.7), 0 4px 20px rgba(0,0,0,0.6)",
-            }}
+            className="text-base md:text-lg text-[#E4C37A] font-raleway font-medium tracking-[0.14em] uppercase flex flex-wrap justify-center gap-2 w-full"
+            style={goldOnPhoto}
           >
             {/* Each separator is bound to the segment before it so a wrap on
                 narrow screens never leaves a "·" starting the next line. */}
@@ -99,11 +100,14 @@ export default function HomeHero({ onPreviewRequest }: HomeHeroProps) {
           </div>
 
           <div className="mt-6 md:mt-8 flex items-center justify-center gap-4 w-full">
-            <div className="h-[1px] w-14 bg-gradient-to-r from-transparent to-[#B8935A]/50" />
-            <span className="text-[#B8935A] text-xl md:text-2xl tracking-[0.3em] font-raleway font-light uppercase">
+            <div className="h-[1px] w-14 bg-gradient-to-r from-transparent to-[#E4C37A]/70" />
+            <span
+              className="text-[#E4C37A] text-xl md:text-2xl tracking-[0.28em] font-raleway font-medium uppercase"
+              style={goldOnPhoto}
+            >
               Ascaya
             </span>
-            <div className="h-[1px] w-14 bg-gradient-to-l from-transparent to-[#B8935A]/50" />
+            <div className="h-[1px] w-14 bg-gradient-to-l from-transparent to-[#E4C37A]/70" />
           </div>
         </motion.div>
       </div>
@@ -132,11 +136,8 @@ export default function HomeHero({ onPreviewRequest }: HomeHeroProps) {
             {PROPERTY_STATS.sqft} · {PROPERTY_STATS.bedrooms} · {PROPERTY_STATS.baths} · {PROPERTY_STATS.acreage} · {PROPERTY_STATS.levels}
           </p>
           <p
-            className="text-sm md:text-base text-gold/90 font-raleway tracking-[0.12em] uppercase"
-            style={{
-              textShadow:
-                "0 0 30px rgba(0,0,0,0.9), 0 0 15px rgba(0,0,0,0.8), 0 2px 8px rgba(0,0,0,0.7)",
-            }}
+            className="text-sm md:text-base text-[#E4C37A] font-raleway font-medium tracking-[0.12em] uppercase"
+            style={goldOnPhoto}
           >
             {COMPLETION_TIMELINE}
           </p>
@@ -146,7 +147,7 @@ export default function HomeHero({ onPreviewRequest }: HomeHeroProps) {
           <Link
             href="/residence"
             onClick={() => trackHeroCtaClick("explore_residence")}
-            className="inline-flex items-center justify-center min-w-[240px] h-[48px] rounded-full px-6 text-sm tracking-wide font-raleway uppercase bg-black/40 backdrop-blur-xl border border-[#B8935A]/40 text-[#B8935A] hover:bg-black/50 hover:border-[#B8935A]/60 hover:scale-[1.04] transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-gold/50"
+            className="inline-flex items-center justify-center min-w-[240px] h-[48px] rounded-full px-6 text-sm tracking-wide font-raleway font-medium uppercase bg-black/55 backdrop-blur-xl border border-[#E4C37A]/70 text-[#E4C37A] hover:bg-black/65 hover:border-[#E4C37A] hover:scale-[1.04] transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-gold/50"
           >
             Explore the Residence
           </Link>
