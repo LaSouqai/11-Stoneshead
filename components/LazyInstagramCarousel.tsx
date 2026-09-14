@@ -8,7 +8,7 @@ export default function LazyInstagramCarousel() {
   return (
     <div className="w-full max-w-6xl mx-auto">
       <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-3">
-        {INSTAGRAM_POSTS.map((post) => (
+        {INSTAGRAM_POSTS.map((post, index) => (
           <a
             key={post.href}
             href={post.href}
@@ -22,6 +22,8 @@ export default function LazyInstagramCarousel() {
               src={post.image}
               alt={post.alt}
               fill
+              unoptimized
+              priority={index === 0}
               sizes="(max-width: 768px) 50vw, 33vw"
               className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
             />

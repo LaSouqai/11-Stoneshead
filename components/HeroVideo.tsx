@@ -11,7 +11,7 @@ export default function HeroVideo() {
         alt="11 Stoneshead at twilight, above the lit Las Vegas Strip"
         fill
         priority
-        quality={90}
+        unoptimized
         sizes="100vw"
         className="object-cover object-center"
       />
