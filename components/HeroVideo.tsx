@@ -8,12 +8,12 @@ export default function HeroVideo() {
     <div className="absolute inset-0 overflow-hidden">
       <Image
         src={HERO_IMAGE}
-        alt="11 Stoneshead at twilight, above the lit Las Vegas Strip"
+        alt="11 Stoneshead from the ridge at twilight, above the lit Las Vegas valley"
         fill
         priority
         unoptimized
         sizes="100vw"
-        className="object-cover object-center"
+        className="object-cover object-[center_38%]"
       />
     </div>
   )
